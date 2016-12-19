@@ -11,6 +11,9 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   },
+  "engines": {
+    "node": "6.6.0"
+  },
   "scripts": {
     "dev": "react-scripts start",
     "postinstall": "react-scripts build",
