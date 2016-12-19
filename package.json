@@ -17,7 +17,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "concurrent \"npm run build\" \"node server/server.js\" ",
+    "start": "concurrent \"react-scripts build\" \"node server/server.js\" ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
