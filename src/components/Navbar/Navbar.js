@@ -10,7 +10,6 @@ class Navbar extends Component {
         <div className="Navbar-logo">
           Logo
         </div>
-        <div className="space"></div>
         <div className="Navbar-links">
           <Link className="link" to="/">Home</Link>
           <Link className="link" to="/about">About</Link>
