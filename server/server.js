@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config();
 
@@ -10,4 +11,6 @@ app.use('/node_modules', express.static('node_modules'));
 
 //require('./config/routes')(app, express);
 
-app.listen(port, () => console.log(`Listening on port: ${port}`, process.env.TEST));
+mongoose.connect(process.env.database ,() => {
+  app.listen(port, () => console.log(`Listening on port: ${port}`));
+});
