@@ -7,10 +7,12 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="wrapper">
+      <div>
+      <div className="content">
         <Navbar />
-        {this.props.children}
-        <Footer />
+          {this.props.children}
+      </div>
+      <Footer />
       </div>
     );
   }
