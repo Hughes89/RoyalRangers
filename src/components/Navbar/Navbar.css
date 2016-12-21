@@ -29,9 +29,10 @@
 
 .link {
   text-decoration: none;
+  color: white;
   padding: 1em;
 }
 
 .link:hover {
-  color: white;
+  color: lightslategrey;
 }
