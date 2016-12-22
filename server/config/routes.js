@@ -6,5 +6,5 @@ module.exports = (app, express) => {
   app.get('/api/about', about.getAbout);
   app.get('/api/home', home.getHome);
   app.put('/api/home', home.editHome);
-  app.get('*', (req, res, next) => res.sendFile(path.resolve('public/index.html')));
+  app.get('*', (req, res, next) => res.sendFile(path.resolve('build/index.html')));
 };
