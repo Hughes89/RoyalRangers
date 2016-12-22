@@ -6,8 +6,12 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const router = (
+  <MuiThemeProvider>
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
@@ -15,6 +19,7 @@ const router = (
       <Route path="/events" component={Events} />
     </Route>
   </Router>
+  </MuiThemeProvider>
 )
 
 render(router, document.getElementById('root'));
