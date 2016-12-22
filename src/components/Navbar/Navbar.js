@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { AppBar, Drawer, MenuItem, Tabs, Tab, FlatButton } from 'material-ui';
 
 import './Navbar.css';
@@ -54,19 +54,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-
-/*
-  //   return (
-  //     <div className="Navbar">
-  //       <div className="Navbar-logo">
-  //         Logo
-  //       </div>
-  //       <div className="Navbar-links">
-  //         <Link className="link" to="/">Home</Link>
-  //         <Link className="link" to="/events">Events</Link>
-  //         <Link className="link" to="/about">About</Link>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  */
