@@ -34,20 +34,20 @@ class Navbar extends Component {
           open={this.state.open}
           onRequestChange={this.handleToggle.bind(this)}
           >
-          <MenuItem onTouchTap={this.gotoLink.bind(this, '/')}>Update Home</MenuItem>
-          <MenuItem onTouchTap={this.gotoLink.bind(this, 'events')}>Update Events</MenuItem>
-          <MenuItem onTouchTap={this.gotoLink.bind(this, 'about')}>Update About</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/')}>Update Home</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('events')}>Update Events</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('about')}>Update About</MenuItem>
         </Drawer>
         <AppBar
           title="Royal Rangers"
           iconElementRight={this.isAdmin()}
-          onRightIconButtonTouchTap={this.handleToggle.bind(this)}
+          onRightIconButtonTouchTap={() => this.handleToggle()}
           showMenuIconButton={false}
           />
           <Tabs>
-            <Tab onClick={this.gotoLink.bind(this, '/')} label="Home"></Tab>
-            <Tab onClick={this.gotoLink.bind(this, 'events')} label="Events"></Tab>
-            <Tab onClick={this.gotoLink.bind(this, 'about')} label="About Us"></Tab>
+            <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
+            <Tab onClick={() => this.gotoLink('events')} label="Events"></Tab>
+            <Tab onClick={() => this.gotoLink('about')} label="About Us"></Tab>
           </Tabs>
       </div>
     )}
