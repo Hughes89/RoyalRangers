@@ -5,6 +5,7 @@ import App from './components/App/App.js';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
+import Login from './components/Login/Login';
 import EditHome from './components/Admin/EditHome/EditHome';
 import EditEvents from './components/Admin/EditEvents/EditEvents';
 import EditAbout from './components/Admin/EditAbout/EditAbout';
@@ -20,6 +21,7 @@ const router = (
       <IndexRoute component={Home} />
       <Route path="/about" component={About} />
       <Route path="/events" component={Events} />
+      <Route path="/login" component={Login} />
       <Route path='/update/home' component={EditHome} />
       <Route path='/update/events' component={EditEvents} />
       <Route path='/update/about' component={EditAbout} />
