@@ -6,10 +6,11 @@ import './App.css';
 
 class App extends Component {
   render() {
+    const { location } = this.props;
     return (
       <div>
       <div className="content">
-        <Navbar />
+        <Navbar location={location} />
           {this.props.children}
       </div>
       <Footer />

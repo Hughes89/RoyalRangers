@@ -9,7 +9,7 @@ class Navbar extends Component {
     super(props);
     this.state = {
       open: false,
-      admin: true
+      admin: true,
     };
   }
 
@@ -26,7 +26,18 @@ class Navbar extends Component {
     return this.state.admin ? (<FlatButton label="Admin Dashboard" />) : (<span></span>);
   }
 
+  activeTab(loc) {
+    const { location } = this.props;
+    const locations = {
+      '/': 0,
+      '/events': 1,
+      '/about': 2
+    }
+    return locations[location.pathname];
+  }
+
   render() {
+    const tab = this.activeTab();
     return (
       <div>
         <Drawer 
@@ -34,9 +45,9 @@ class Navbar extends Component {
           open={this.state.open}
           onRequestChange={this.handleToggle.bind(this)}
           >
-          <MenuItem onTouchTap={() => this.gotoLink('/')}>Update Home</MenuItem>
-          <MenuItem onTouchTap={() => this.gotoLink('events')}>Update Events</MenuItem>
-          <MenuItem onTouchTap={() => this.gotoLink('about')}>Update About</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Update Events</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/about')}>Update About</MenuItem>
         </Drawer>
         <AppBar
           title="Royal Rangers"
@@ -44,10 +55,10 @@ class Navbar extends Component {
           onRightIconButtonTouchTap={() => this.handleToggle()}
           showMenuIconButton={false}
           />
-          <Tabs>
+          <Tabs initialSelectedIndex={tab}>
             <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
-            <Tab onClick={() => this.gotoLink('events')} label="Events"></Tab>
-            <Tab onClick={() => this.gotoLink('about')} label="About Us"></Tab>
+            <Tab onClick={() => this.gotoLink('/events')} label="Events"></Tab>
+            <Tab onClick={() => this.gotoLink('/about')} label="About Us"></Tab>
           </Tabs>
       </div>
     )}
