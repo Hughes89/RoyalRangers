@@ -3,23 +3,37 @@ import React, { Component } from 'react';
 import './Home.css';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      banner: '',
+      body: ''
+    };
+  }
+
+  componentWillMount() {
+    this.getHomeData();
+  }
+
+  getHomeData() {
+    let url = 'http://localhost:1337/api/home';
+    fetch(url, {method: 'GET'})
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          body: data.content,
+          banner: data.banner
+        });
+      });
+  }
+
   render() {
     return (
       <div className="Home">
-        <div className="main-image"></div>
-        <p><strong>The standard Lorem Ipsum passage, used since the 1500s</strong></p>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        </p>
-        <hr />
-        <p><strong>The standard Lorem Ipsum passage, used since the 1500s</strong></p>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        </p>
-        <p><strong>The standard Lorem Ipsum passage, used since the 1500s</strong></p>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        </p>
+        <div className="main-image" style={{backgroundImage: `url(${this.state.banner})`}}></div>
+        <div className="body">
+          <p>{this.state.body}</p>
+        </div>
       </div>
     );
   }
