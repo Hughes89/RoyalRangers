@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
 import Login from './components/Login/Login';
+import NotFound from './components/NotFound/NotFound';
 import EditHome from './components/Admin/EditHome/EditHome';
 import EditEvents from './components/Admin/EditEvents/EditEvents';
 import EditAbout from './components/Admin/EditAbout/EditAbout';
@@ -25,6 +26,7 @@ const router = (
       <Route path='/update/home' component={EditHome} />
       <Route path='/update/events' component={EditEvents} />
       <Route path='/update/about' component={EditAbout} />
+      <Route path='*' component={NotFound} />
     </Route>
   </Router>
   </MuiThemeProvider>
