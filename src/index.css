@@ -7,3 +7,7 @@ body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
 }
+
+.button-align {
+  text-align: center;
+}

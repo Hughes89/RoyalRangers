@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TextField, RaisedButton } from 'material-ui';
 
 import './EditAbout.css';
 
@@ -25,10 +26,27 @@ class EditAbout extends Component {
       });
   }
 
+  handleInput(e, state) {
+    let value = e.target.value;
+    this.setState({
+      [state]: value
+    });
+  }
+
   render() {
     return (
       <div className="Edit-About">
-      <textarea value={this.state.body}></textarea>
+      <TextField
+        value={this.state.body}
+          hintText="About us Content"
+          floatingLabelText="About us Content"
+          fullWidth={true}
+          multiLine={true}     
+          onChange={(e) => this.handleInput(e, 'body')}   
+      /><br />
+      <div className="button-align">
+        <RaisedButton label="Update" primary={true} />
+      </div>
       </div>
     );
   }
