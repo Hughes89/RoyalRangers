@@ -5,7 +5,7 @@ import moment from 'moment';
 import Event from '../Event/Event';
 
 import myEvents from './eventtest';
-import BigCalendarCSS from 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Events.css';
 
 BigCalendar.momentLocalizer(moment);
