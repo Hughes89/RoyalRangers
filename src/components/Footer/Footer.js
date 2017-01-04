@@ -7,7 +7,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="Footer">
-        <Link to="/login">Admin Login</Link>
+        Footer here
       </div>
     );
   }

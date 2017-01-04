@@ -16,7 +16,12 @@ class About extends Component {
 
   getAboutData() {
     let url = 'http://localhost:1337/api/about';
-    fetch(url, {method: 'GET'})
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({
