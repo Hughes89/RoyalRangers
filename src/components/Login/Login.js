@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatButton, TextField } from 'material-ui';
+
 import './Login.css';
 
 class Login extends Component {
@@ -13,7 +14,23 @@ class Login extends Component {
 
   signin(e) {
     e.preventDefault();
-    console.log(this.state);
+    let url = 'http://localhost:1337/api/signin';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem('RR', data.token);
+        window.location.href = "/";
+      });
   }
 
   handleInput(e, state) {

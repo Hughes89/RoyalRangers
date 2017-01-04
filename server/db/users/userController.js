@@ -35,15 +35,16 @@ module.exports = {
             if (!foundUser) {
               return res.sendStatus(401);
             }
+            user.password = '';
+            user.salt = '';
             const token = jwt.encode(user, process.env.secret);
-            res.json({token: token});
+            res.json({ token: token });
           });
       });
   },
 
   changePassword: (req, res, next) => {
-    //Grab username from token
-    const username = req.body.username.toLowerCase();
+    const username = req.user.username;
     User.findOne({ username: username })
       .then((user) => {
         helper.comparePasswords(req.body.password, user.password)
@@ -60,5 +61,9 @@ module.exports = {
               });
           });
       });
+  },
+
+  privelageCheck: (req, res, next) => {
+    res.json({privelage: req.user.privelage});
   }
 };

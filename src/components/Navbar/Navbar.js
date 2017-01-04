@@ -9,21 +9,75 @@ class Navbar extends Component {
     super(props);
     this.state = {
       open: false,
-      admin: true,
+      user: false,
+      admin: false
     };
   }
 
-  handleToggle() {
-    this.setState({open: !this.state.open});
+  componentWillMount() {
+    this.isLoggedIn();
+  }
+
+  isLoggedIn() {
+    const url = 'http://localhost:1337/api/privelage';
+    if (localStorage.getItem('RR') !== null) {
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('RR')
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.privelage === 'admin') {
+            this.setState({ user: true, admin: true });
+          } else if (data.privelage === 'user') {
+            this.setState({ user: true, admin: false });
+          }
+        });
+    }
+  }
+
+  handleButton = (e) => {
+    if (this.state.user && this.state.admin) {
+      this.setState({open: !this.state.open});
+    } else if (this.state.user && !this.state.admin) {
+      console.log('Change Password');
+    } else if (!this.state.user && !this.state.admin) {
+      this.gotoLink('Login');
+    }
+  }
+
+  isAdmin() {
+    if (this.state.user && this.state.admin) {
+      return (
+        <span>
+        <FlatButton style={{color: 'white'}} label="Admin Dashboard" onClick={this.handleButton}></FlatButton>
+        <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} ></FlatButton>
+        </span> )
+    } else if (this.state.user && !this.state.admin) {
+      return (
+        <span>
+        <FlatButton style={{color: 'white'}} label="Update Password" onClick={this.handleButton.bind(this)}></FlatButton>
+        <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} ></FlatButton>
+        </span> )
+    } else if (!this.state.user && !this.state.admin) {
+      return <FlatButton label="Sign in to view full site" onClick={this.handleButton.bind(this)} />
+    }
+  }
+
+  logout = () => {
+    localStorage.removeItem('RR');
+    this.setState({
+      user: false,
+      admin: false
+    })
+    this.gotoLink('/');
   }
 
   gotoLink(location) {
     this.setState({open: false});
     browserHistory.push(location);
-  }
-
-  isAdmin() {
-    return this.state.admin ? (<FlatButton label="Admin Dashboard" />) : (<span></span>);
   }
 
   activeTab(loc) {
@@ -32,34 +86,47 @@ class Navbar extends Component {
       '/': 0,
       '/events': 1,
       '/about': 2
-    }
+    };
     return locations[location.pathname];
   }
 
+  menuCheck() {
+    if (this.state.user) {
+      return (
+        <span>
+          <Tabs initialSelectedIndex={this.activeTab()}>
+            <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
+            <Tab onClick={() => this.gotoLink('/events')} label="Events"></Tab>
+            <Tab onClick={() => this.gotoLink('/about')} label="About Us"></Tab>
+          </Tabs>
+        </span>
+      )
+    } else {
+      return (<span></span>)
+    }
+  }
+
   render() {
-    const tab = this.activeTab();
+    //const tab = this.activeTab();
     return (
       <div>
         <Drawer 
           docked={false}
           open={this.state.open}
-          onRequestChange={this.handleToggle.bind(this)}
+          onRequestChange={this.handleButton.bind(this)}
           >
           <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Update Events</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/about')}>Update About</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/users')}>Manage Users</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/pass')}>Update Password</MenuItem>
         </Drawer>
         <AppBar
           title="Royal Rangers"
           iconElementRight={this.isAdmin()}
-          onRightIconButtonTouchTap={() => this.handleToggle()}
           showMenuIconButton={false}
           />
-          <Tabs initialSelectedIndex={tab}>
-            <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
-            <Tab onClick={() => this.gotoLink('/events')} label="Events"></Tab>
-            <Tab onClick={() => this.gotoLink('/about')} label="About Us"></Tab>
-          </Tabs>
+          {this.menuCheck()}
       </div>
     )}
 }
