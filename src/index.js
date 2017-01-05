@@ -10,6 +10,7 @@ import NotFound from './components/NotFound/NotFound';
 import EditHome from './components/Admin/EditHome/EditHome';
 import EditEvents from './components/Admin/EditEvents/EditEvents';
 import EditAbout from './components/Admin/EditAbout/EditAbout';
+import EditUsers from './components/Admin/EditUsers/EditUsers';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -26,6 +27,7 @@ const router = (
       <Route path='/update/home' component={EditHome} />
       <Route path='/update/events' component={EditEvents} />
       <Route path='/update/about' component={EditAbout} />
+      <Route path='/update/users' component={EditUsers} />
       <Route path='*' component={NotFound} />
     </Route>
   </Router>
