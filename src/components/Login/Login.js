@@ -7,7 +7,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     };
   }
@@ -22,7 +22,7 @@ class Login extends Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.password
       })
     })
@@ -45,10 +45,10 @@ class Login extends Component {
       <div className="Login">
       <form>
           <TextField
-            hintText="Username"
-            floatingLabelText="Username"
-            value={this.state.username}
-            onChange={(e) => this.handleInput(e, 'username')}
+            hintText="E-mail"
+            floatingLabelText="E-mail"
+            value={this.state.email}
+            onChange={(e) => this.handleInput(e, 'email')}
             /><br />
           <TextField
             hintText="Password"
