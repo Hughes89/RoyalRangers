@@ -14,6 +14,8 @@ module.exports = (app, express) => {
   app.post('/api/signin', user.signin);
   app.put('/api/password', auth.isAuth, user.changePassword);
   app.get('/api/privelage', auth.isAuth, user.privelageCheck);
+  app.get('/api/users', auth.isAuth, user.getAllUsers);
+  app.delete('/api/remove/user', auth.isAuth, user.removeUser);
 
 
   app.get('*', (req, res, next) => res.sendFile(path.resolve('build/index.html')));

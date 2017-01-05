@@ -3,7 +3,6 @@ var jwt = require('jwt-simple');
 module.exports = {
   isAuth: (req, res, next) => {
     let token = req.headers['authorization'];
-    console.log(typeof token);
     if (!token) {
       return res.sendStatus(401);
     }
