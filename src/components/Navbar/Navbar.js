@@ -42,7 +42,7 @@ class Navbar extends Component {
     if (this.state.user && this.state.admin) {
       this.setState({open: !this.state.open});
     } else if (this.state.user && !this.state.admin) {
-      console.log('Change Password');
+      this.gotoLink('UpPassword')
     } else if (!this.state.user && !this.state.admin) {
       this.gotoLink('Login');
     }
