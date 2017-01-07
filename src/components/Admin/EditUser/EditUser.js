@@ -27,7 +27,7 @@ class EditUser extends React.Component {
   }
   
   render() {
-    const { user, i, removeUserFromState } = this.props;
+    const { user, i } = this.props;
     return (
       <div className="Edit-User" id={i}>
       <div className="User-Container">
