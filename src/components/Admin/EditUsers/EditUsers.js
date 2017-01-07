@@ -36,7 +36,8 @@ class editUsers extends Component {
 
   addUserToState = (user) => {
     this.setState({
-      body: this.state.body.concat(user)
+      body: this.state.body.concat(user),
+      manage: !this.state.manage
     });
   }
 
@@ -74,7 +75,6 @@ class editUsers extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="Edit-Users">
         {this.handleView()}
