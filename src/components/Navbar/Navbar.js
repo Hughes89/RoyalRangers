@@ -114,9 +114,8 @@ class Navbar extends Component {
           open={this.state.open}
           onRequestChange={this.handleButton.bind(this)}
           >
-          <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home</MenuItem>
-          <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Update Events</MenuItem>
-          <MenuItem onTouchTap={() => this.gotoLink('/update/about')}>Update About</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home Page</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Manage Events</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/users')}>Manage Users</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/pass')}>Update Password</MenuItem>
         </Drawer>
