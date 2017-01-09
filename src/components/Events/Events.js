@@ -19,11 +19,11 @@ class Events extends Component {
     };
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({open: false});
   }
 
-  handleToggle(event) {
+  handleToggle = (event) => {
     this.setState({
       open: !this.state.open,
       event: event
@@ -35,7 +35,7 @@ class Events extends Component {
       <FlatButton
         label="Close"
         primary={true}
-        onTouchTap={() => this.handleClose()}
+        onTouchTap={this.handleClose}
       />
     ];
 
@@ -46,7 +46,7 @@ class Events extends Component {
           defaultView='month'
           timeslots={2}
           events={myEvents}
-          onSelectEvent={event => this.handleToggle(event)}
+          onSelectEvent={this.handleToggle}
           defaultDate={new Date()}
         />
         <Dialog
@@ -54,7 +54,7 @@ class Events extends Component {
           actions={action}
           modal={false}
           open={this.state.open}
-          onRequestClose={() => this.handleClose()}
+          onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
           >
           <Event event={this.state.event} />
