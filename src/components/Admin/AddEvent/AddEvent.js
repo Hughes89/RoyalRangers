@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, SelectField, MenuItem, DatePicker } from 'material-ui';
+import { FlatButton, TextField, DatePicker } from 'material-ui';
 
 import './AddEvent.css';
 
@@ -33,16 +33,12 @@ class AddEvent extends Component {
     });
   }
 
-  addEvent(e) {
+  addEvent = (e) => {
     e.preventDefault();
     console.log(this.state);
   }
 
-  viewClick = () => {
-    this.setState({
-      manage: !this.state.manage
-    });
-  }
+  
 
   render() {
     return (
@@ -73,13 +69,13 @@ class AddEvent extends Component {
             hintText="End Date"
             mode="landscape"
             fullWidth={true}
-            onChange={this.state.end} 
+            value={this.state.end} 
             onChange={this.handleEnd} />
           <div className="center">
           <FlatButton 
             type="submit" 
             label="Create Event" 
-            onClick={(e) => this.addEvent(e)} />
+            onClick={this.addEvent} />
           </div>
         </form>
       </div>
