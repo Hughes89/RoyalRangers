@@ -107,7 +107,6 @@ class Navbar extends Component {
   }
 
   render() {
-    //const tab = this.activeTab();
     return (
       <div>
         <Drawer 
@@ -122,7 +121,8 @@ class Navbar extends Component {
           <MenuItem onTouchTap={() => this.gotoLink('/update/pass')}>Update Password</MenuItem>
         </Drawer>
         <AppBar
-          title="Royal Rangers"
+          title={<span className="title">Royal Rangers</span>}
+          onTitleTouchTap={() => this.gotoLink('/')}
           iconElementRight={this.isAdmin()}
           showMenuIconButton={false}
           />
