@@ -1,3 +1,8 @@
-.Edit-Events {
-  padding: 1em;
+.event-manage {
+  text-align: center;
+  font-size: 25px;
+}
+
+.event-link:hover {
+  cursor: pointer;
 }

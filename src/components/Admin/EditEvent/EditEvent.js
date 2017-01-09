@@ -4,7 +4,7 @@ import './EditEvent.css';
 
 class EditEvent extends React.Component {
   render() {
-    const { event, i, remove } = this.props;
+    const { event, i, removeEventFromState } = this.props;
     return (
       <div className="Edit-Event" id={i}>
       <div className="Event-Container">
@@ -12,7 +12,8 @@ class EditEvent extends React.Component {
         <CardText>
           <strong><p>{event.title}</p></strong>
           <p>{event.description}</p>
-          <RaisedButton label="Remove" onClick={(e) => remove(event.title)} />
+          <RaisedButton label="Edit" />{' '}
+          <RaisedButton label="Remove" onClick={() => removeEventFromState(event.title)} />
         </CardText>
       </Card>
       </div>
