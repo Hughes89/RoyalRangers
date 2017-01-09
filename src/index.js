@@ -23,12 +23,12 @@ const router = (
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/events" component={Events} />
+      <Route path="/events" component={Events} onEnter={authenticateUser} />
       <Route path="/login" component={Login} />
-      <Route path='/update/home' component={EditHome} />
-      <Route path='/update/events' component={EditEvents} />
-      <Route path='/update/about' component={EditAbout} />
-      <Route path='/update/users' component={EditUsers} />
+      <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} />
+      <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} />
+      <Route path='/update/about' component={EditAbout} onEnter={authenticateAdmin} />
+      <Route path='/update/users' component={EditUsers} onEnter={authenticateAdmin} />
       <Route path='/update/pass' component={UpPassword} />
       <Route path='*' component={NotFound} />
     </Route>
@@ -36,4 +36,45 @@ const router = (
   </MuiThemeProvider>
 )
 
+
 render(router, document.getElementById('root'));
+
+function authenticateAdmin() {
+  const url = 'http://localhost:1337/api/privelage';
+  if (localStorage.getItem('RR')) {
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.privelage !== 'admin') {
+          browserHistory.push('/');
+        }
+      });
+  } else {
+    browserHistory.push('/');
+  }
+}
+
+function authenticateUser() {
+  const url = 'http://localhost:1337/api/privelage';
+  if (localStorage.getItem('RR')) {
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.privelage !== 'admin' && data.privelage !== 'user') {
+          browserHistory.push('/');
+        }
+      });
+  } else {
+    browserHistory.push('/');
+  }
+}
