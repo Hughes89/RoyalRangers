@@ -54,18 +54,18 @@ export default [
   },
   {
     'title': 'Happy Hour',
-    'start':new Date(2015, 3, 12, 17, 0, 0, 0),
-    'end': new Date(2015, 3, 12, 17, 30, 0, 0),
+    'start': 'Sun Jan 22 2017 00:00:00 GMT-0500 (EST)',
+    'end': 'Sun Jan 22 2017 00:00:00 GMT-0500 (EST)',
     desc: 'Most important meal of the day'
   },
   {
     'title': 'Dinner',
-    'start':new Date(2015, 3, 12, 20, 0, 0, 0),
-    'end': new Date(2015, 3, 12, 21, 0, 0, 0)
+    'start': '2017-01-18T20:40:27.226Z',
+    'end': '2017-01-18T21:40:27.226Z'
   },
   {
     'title': 'Birthday Party',
-    'start':new Date(2015, 3, 13, 7, 0, 0),
-    'end': new Date(2015, 3, 13, 10, 30, 0)
+    'start':new Date(2017, 0, 3, 7, 0, 0),
+    'end': new Date(2017, 0, 3, 10, 30, 0)
   }
 ]
