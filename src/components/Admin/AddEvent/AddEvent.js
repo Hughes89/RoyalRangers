@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, DatePicker } from 'material-ui';
+import { FlatButton, TextField, DatePicker, TimePicker } from 'material-ui';
 
 import './AddEvent.css';
 
@@ -9,20 +9,38 @@ class AddEvent extends Component {
     this.state = {
       title: '',
       description: '',
-      start: null,
-      end: null
+      startDate: null,
+      endDate: null,
+      startTime: null,
+      endTime: null
     };
   }
 
-  handleStart = (e, date) => {
+  handleStartDate = (e, date) => {
+    date = date.toString().slice(0, 15);
     this.setState({
-      start: date
+      startDate: date
     });
   }
 
-  handleEnd = (e, date) => {
+  handleStartTime = (e, date) => {
+    date = date.toString().slice(16);
     this.setState({
-      end: date
+      startTime: date
+    });
+  }
+
+  handleEndDate = (e, date) => {
+    date = date.toString().slice(0, 15);
+    this.setState({
+      endDate: date
+    });
+  }
+
+  handleEndTime = (e, date) => {
+    date = date.toString().slice(16);
+    this.setState({
+      endTime: date
     });
   }
 
@@ -35,15 +53,18 @@ class AddEvent extends Component {
 
   addEvent = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const start = `${this.state.startDate} ${this.state.startTime}`;
+    const end =  `${this.state.endDate} ${this.state.endTime}`;
+    console.log(this.state, start, end);
   }
 
   
 
   render() {
     return (
-      <div className="AddEvent">
+      <div className="Add-Event">
         <form className="Add-Event-Form">
+        Basic Event Information:<br />
           <TextField
             hintText="Title"
             floatingLabelText="Title"
@@ -58,19 +79,27 @@ class AddEvent extends Component {
             value={this.state.description}
             onChange={(e) => this.handleInput(e, 'description')}
             fullWidth={true} />
-          <br />
+          <p>Event Dates & Times:</p>
           <DatePicker 
             hintText="Start Date" 
             mode="landscape"
             fullWidth={true}
-            value={this.state.start} 
-            onChange={this.handleStart} />
+            onChange={this.handleStartDate} />
+          <TimePicker
+            format="ampm"
+            hintText="Start Time"
+            fullWidth={true}
+            onChange={this.handleStartTime} />
           <DatePicker 
             hintText="End Date"
             mode="landscape"
             fullWidth={true}
-            value={this.state.end} 
-            onChange={this.handleEnd} />
+            onChange={this.handleEndDate} />
+          <TimePicker
+            format="ampm"
+            hintText="End Time"
+            fullWidth={true}
+            onChange={this.handleEndTime} />
           <div className="center">
           <FlatButton 
             type="submit" 
