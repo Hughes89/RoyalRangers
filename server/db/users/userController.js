@@ -23,9 +23,7 @@ module.exports = {
               privelage: req.body.privelage
             })
               .then((user) => {
-                  user.password = '';
-                  user.salt = '';
-                  res.json({ user: user });
+                res.sendStatus(201);
               });
           });
       });
@@ -93,7 +91,7 @@ module.exports = {
       return res.sendStatus(401);
     }
     const id = req.body.id;
-    User.find({ _id: id })
+    User.findById(id)
       .remove()
       .exec((err, data) => {
         if (err) {
