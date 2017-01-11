@@ -10,9 +10,7 @@ module.exports = {
       description: req.body.description,
       start: req.body.start,
       end: req.body.end })
-      .then(event => {
-        res.sendStatus(201);
-      })
+      .then(event => res.sendStatus(201))
       .catch(err => {
         console.log(err);
         res.sendStatus(400);
@@ -36,11 +34,26 @@ module.exports = {
       });
   },
 
+  editEvent: (req, res, next) => {
+    console.log(req.body);
+    const id = req.body.id;
+    const content = {
+      title: req.body.title,
+      description: req.body.description,
+      start: req.body.start,
+      end: req.body.end
+    }
+    Events.update({ _id: id}, 
+      {title: req.body.title,
+      description: req.body.description},
+      {new: true})
+      .then(event => res.sendStatus(200))
+      .catch(err => res.sendStatus(404));
+  },
+
   getEvents: (req, res, next) => {
     Events.find({})
-      .then(events => {
-        res.json(events);
-      })
+      .then(events => res.json(events))
       .catch(err => {
         console.log(err);
         res.sendStatus(404);
