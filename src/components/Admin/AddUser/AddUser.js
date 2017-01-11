@@ -18,6 +18,13 @@ class AddUser extends Component {
   addUser(e) {
     e.preventDefault();
     let url = 'http://localhost:1337/api/signup';
+    let userFormData = {
+      email: this.state.email,
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      privelage: this.state.privelage 
+    }
     fetch(url, {
       method: 'POST',
       headers: {
@@ -25,17 +32,11 @@ class AddUser extends Component {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('RR')
       },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        privelage: this.state.privelage
-      })
+      body: JSON.stringify(userFormData)
     })
-      .then(res => res.json())
+      .then(res => res)
       .then(data => {
-        this.props.addUserToState([data.user]);
+        this.props.addUserToState(userFormData);
       });
   }
 
