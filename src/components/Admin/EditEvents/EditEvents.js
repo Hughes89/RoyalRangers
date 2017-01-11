@@ -33,7 +33,6 @@ class EditEvents extends Component {
       });
   }
 
-  //Change title to _Id once connected to db
   removeEventFromState = (id) => {
     this.setState({
       body: this.state.body.filter(ele => ele._id !== id)
@@ -47,11 +46,21 @@ class EditEvents extends Component {
     });
   }
 
+  updateEventState = (updated) => {
+    this.state.body.map(event => {
+      if (event._id === updated.id) {
+        event.title = updated.title;
+        event.description = updated.description;
+      }
+    });
+  }
+
+
   manageEvents() {
     if (this.state.manage) {
       return this.state.body.map((event, i) => {
         return (
-          <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} />
+          <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} />
       )})
     } else {
       return (
