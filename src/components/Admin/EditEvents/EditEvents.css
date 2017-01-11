@@ -6,3 +6,7 @@
 .event-link:hover {
   cursor: pointer;
 }
+
+.Edit-Events {
+  text-align: center;
+}

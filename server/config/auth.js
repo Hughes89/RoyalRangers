@@ -18,4 +18,5 @@ module.exports = {
       return sendStatus(401);
     }
   }
+
 };
