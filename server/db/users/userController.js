@@ -86,7 +86,6 @@ module.exports = {
   },
 
   removeUser: (req, res, next) => {
-    console.log(req.body);
     if (req.user.privelage === 'user') {
       return res.sendStatus(401);
     }
