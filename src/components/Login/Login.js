@@ -8,7 +8,9 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      emailError: '',
+      passwordError: ''
     };
   }
 
@@ -26,11 +28,34 @@ class Login extends Component {
         password: this.state.password
       })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 401) {
+          this.incorrectPassword();
+        } else if (res.status === 404) {
+          this.unknownEmail();
+        } else {
+          return res.json();
+        }})
       .then(data => {
-        localStorage.setItem('RR', data.token);
-        window.location.href = "/";
+        if (data) {
+          localStorage.setItem('RR', data.token);
+          window.location.href = "/";
+        }
       });
+  }
+
+  incorrectPassword() {
+    this.setState({
+      passwordError: 'Incorrect Password',
+      emailError: ''
+    })
+  }
+
+  unknownEmail() {
+    this.setState({
+      emailError: 'Incorrect E-mail',
+      passwordError: ''
+    })
   }
 
   handleInput(e, state) {
@@ -43,23 +68,25 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-      <form>
-          <TextField
-            hintText="E-mail"
-            floatingLabelText="E-mail"
-            value={this.state.email}
-            onChange={(e) => this.handleInput(e, 'email')}
+        <form>
+            <TextField
+              hintText="E-mail"
+              floatingLabelText="E-mail"
+              value={this.state.email}
+              onChange={(e) => this.handleInput(e, 'email')}
+              errorText={this.state.emailError}
+              /><br />
+            <TextField
+              hintText="Password"
+              floatingLabelText="Password"
+              type="password"
+              value={this.state.password}
+              onChange={(e) => this.handleInput(e, 'password')}
+              errorText={this.state.passwordError}
             /><br />
-          <TextField
-            hintText="Password"
-            floatingLabelText="Password"
-            type="password"
-            value={this.state.password}
-            onChange={(e) => this.handleInput(e, 'password')}
-          /><br />
-          <FlatButton type="submit" label="Sign in" onClick={(e) => this.signin(e)} />
-        </form>
-      </div>
+            <FlatButton type="submit" label="Sign in" onClick={(e) => this.signin(e)} />
+          </form>
+        </div>
     );
   }
 }
