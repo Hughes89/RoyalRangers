@@ -4,7 +4,6 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import Event from '../Event/Event';
 
-import myEvents from './eventtest';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Events.css';
 
