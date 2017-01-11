@@ -10,15 +10,42 @@ class EditEvents extends Component {
     super(props);
     this.state = {
       manage: true,
-      body: myEvents
+      body: []
     };
   }
 
+  componentWillMount() {
+    this.getEventsData();
+  }
+
+  getEventsData() {
+    let url = 'http://localhost:1337/api/events';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          body: data
+        });
+      });
+  }
+
   //Change title to _Id once connected to db
-  removeEventFromState = (title) => {
-    console.log(title)
+  removeEventFromState = (id) => {
     this.setState({
-      body: this.state.body.filter(ele => ele.title !== title)
+      body: this.state.body.filter(ele => ele._id !== id)
+    });
+  }
+
+  addEventToState = (event) => {
+    this.setState({
+      body: this.state.body.concat(event),
+      manage: !this.state.manage
     });
   }
 
@@ -30,7 +57,7 @@ class EditEvents extends Component {
       )})
     } else {
       return (
-        <AddEvent addUserToState={this.addUserToState} />
+        <AddEvent addEventToState={this.addEventToState} />
         )
     }
   }
