@@ -15,8 +15,33 @@ class Events extends Component {
     super(props);
     this.state = {
       open: false,
-      event: ''
+      event: '',
+      body: []
     };
+  }
+
+  componentWillMount() {
+    this.getEventsData();
+  }
+
+  getEventsData() {
+    let url = 'http://localhost:1337/api/events';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        data.forEach((ele) => {
+          ele.start = new Date(ele.start);
+          ele.end = new Date(ele.end);
+        });
+        this.setState({
+          body: this.state.body.concat(data)
+        });
+      });
   }
 
   handleClose = () => {
@@ -45,7 +70,7 @@ class Events extends Component {
           selectable
           defaultView='month'
           timeslots={2}
-          events={myEvents}
+          events={this.state.body}
           onSelectEvent={this.handleToggle}
           defaultDate={new Date()}
         />
