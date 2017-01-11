@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardText, RaisedButton } from 'material-ui';
+import Moment from 'react-moment';
 import './EditEvent.css';
 
 class EditEvent extends React.Component {
@@ -27,6 +28,8 @@ class EditEvent extends React.Component {
 
   render() {
     const { event, i } = this.props;
+    event.start = new Date(event.start).toISOString();
+    event.end = new Date(event.end).toISOString();
     return (
       <div className="Edit-Event" id={i}>
       <div className="Event-Container">
@@ -34,6 +37,10 @@ class EditEvent extends React.Component {
         <CardText>
           <strong><p>{event.title}</p></strong>
           <p>{event.description}</p>
+          <p><strong>Start Date</strong>: <Moment format="MM/DD/YYYY" date={event.start} /></p>
+          <p><strong>Start Time</strong>: <Moment format="HH:mm" date={event.start} /></p>
+          <p><strong>End Date</strong>: <Moment format="MM/DD/YYYY" date={event.end} /></p>
+          <p><strong>End Time</strong>: <Moment format="HH:mm" date={event.end} /></p>
           <RaisedButton label="Edit" />{' '}
           <RaisedButton label="Remove" onClick={() => this.removeEvent(event._id)} />
         </CardText>
