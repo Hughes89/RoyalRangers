@@ -53,9 +53,26 @@ class AddEvent extends Component {
 
   addEvent = (e) => {
     e.preventDefault();
-    const start = `${this.state.startDate} ${this.state.startTime}`;
-    const end =  `${this.state.endDate} ${this.state.endTime}`;
-    console.log(this.state, start, end);
+    let eventFormData = {
+      title: this.state.title,
+      description: this.state.description,
+      start: `${this.state.startDate} ${this.state.startTime}`,
+      end: `${this.state.endDate} ${this.state.endTime}`
+    };
+    const url = 'http://localhost:1337/api/add/event';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      },
+      body: JSON.stringify(eventFormData)
+    })
+      .then(res => res)
+      .then(data => {
+        this.props.addEventToState(eventFormData);
+      });
   }
 
   
@@ -64,7 +81,6 @@ class AddEvent extends Component {
     return (
       <div className="Add-Event">
         <form className="Add-Event-Form">
-        Basic Event Information:<br />
           <TextField
             hintText="Title"
             floatingLabelText="Title"
@@ -79,28 +95,29 @@ class AddEvent extends Component {
             value={this.state.description}
             onChange={(e) => this.handleInput(e, 'description')}
             fullWidth={true} />
-          <p>Event Dates & Times:</p>
-          <DatePicker 
+          <div className="center">
+          <strong>Start Date:</strong> <DatePicker 
             hintText="Start Date" 
             mode="landscape"
-            fullWidth={true}
+            style={{display: 'inline-block'}}
             onChange={this.handleStartDate} />
-          <TimePicker
+          <strong>Start Time:</strong> <TimePicker
             format="ampm"
             hintText="Start Time"
-            fullWidth={true}
+            style={{display: 'inline-block'}}
             onChange={this.handleStartTime} />
-          <DatePicker 
+          <br />
+          <strong>End Date:</strong> <DatePicker 
             hintText="End Date"
             mode="landscape"
-            fullWidth={true}
+            style={{display: 'inline-block'}}
             onChange={this.handleEndDate} />
-          <TimePicker
+          <strong>End Time:</strong> <TimePicker
             format="ampm"
             hintText="End Time"
-            fullWidth={true}
+            style={{display: 'inline-block'}}
             onChange={this.handleEndTime} />
-          <div className="center">
+          <br />
           <FlatButton 
             type="submit" 
             label="Create Event" 
