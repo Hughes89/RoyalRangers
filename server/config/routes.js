@@ -22,6 +22,7 @@ module.exports = (app, express) => {
   app.post('/api/add/event', auth.isAuth, events.addEvent);
   app.get('/api/events', auth.isAuth, events.getEvents);
   app.delete('/api/remove/event', auth.isAuth, events.deleteEvent);
+  app.put('/api/update/event', auth.isAuth, events.editEvent);
 
 
   app.get('*', (req, res, next) => res.sendFile(path.resolve('build/index.html')));
