@@ -58,7 +58,7 @@ class Navbar extends Component {
     } else if (this.state.user && !this.state.admin) {
       return (
         <span>
-        <FlatButton style={{color: 'white'}} label="Update Password" onClick={this.handleButton.bind(this)}></FlatButton>
+        <FlatButton style={{color: 'white'}} label="Update Password" onClick={() => this.gotoLink('/update/pass')}></FlatButton>
         <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} ></FlatButton>
         </span> )
     } else if (!this.state.user && !this.state.admin) {
