@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import EditEvent from '../EditEvent/EditEvent';
 import AddEvent from '../AddEvent/AddEvent';
-import myEvents from '../../Events/eventtest';
 import './EditEvents.css';
 
 
@@ -28,7 +27,6 @@ class EditEvents extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           body: data
         });
