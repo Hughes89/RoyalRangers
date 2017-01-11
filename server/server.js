@@ -11,7 +11,7 @@ app.use('/node_modules', express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE', 'PUT');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
     next();
 });
