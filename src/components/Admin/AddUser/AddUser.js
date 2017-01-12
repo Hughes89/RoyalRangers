@@ -11,13 +11,17 @@ class AddUser extends Component {
       password: '',
       firstName: '',
       lastName: '',
-      privelage: 'user'
+      privelage: 'user',
+      emailError: ''
     };
   }
 
   addUser(e) {
     e.preventDefault();
     let url = 'http://localhost:1337/api/signup';
+    if (!validateEmail(this.state.email)) {
+      return this.errorHandling('email');
+    }
     let userFormData = {
       email: this.state.email,
       password: this.state.password,
@@ -38,6 +42,19 @@ class AddUser extends Component {
       .then(data => {
         this.props.addUserToState(userFormData);
       });
+
+      function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+  }
+
+  errorHandling(error) {
+    if (error === 'email') {
+      this.setState({
+        emailError: 'Please enter a valid e-mail'
+      })
+    }
   }
 
   handleInput(e, state) {
@@ -56,6 +73,7 @@ class AddUser extends Component {
           <TextField
             hintText="E-mail"
             floatingLabelText="E-mail"
+            errorText={this.state.emailError}
             value={this.state.email}
             onChange={(e) => this.handleInput(e, 'email')}
             />

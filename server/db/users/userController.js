@@ -80,7 +80,6 @@ module.exports = {
           user.password = undefined;
           user.salt = undefined;
         });
-        console.log(users);
         res.json(users);
       });
   },
