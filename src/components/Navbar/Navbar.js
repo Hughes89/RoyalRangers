@@ -75,12 +75,12 @@ class Navbar extends Component {
     this.gotoLink('/');
   }
 
-  gotoLink(location) {
+  gotoLink(location, title) {
     this.setState({open: false});
     browserHistory.push(location);
   }
 
-  activeTab(loc) {
+  activeTab() {
     const { location } = this.props;
     const locations = {
       '/': 0,
@@ -97,7 +97,7 @@ class Navbar extends Component {
           <Tabs initialSelectedIndex={this.activeTab()}>
             <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
             <Tab onClick={() => this.gotoLink('/events')} label="Events"></Tab>
-            <Tab onClick={() => this.gotoLink('/about')} label="About Us"></Tab>
+            <Tab onClick={() => this.gotoLink('/about')} label="Pictures"></Tab>
           </Tabs>
         </span>
       )
@@ -121,7 +121,6 @@ class Navbar extends Component {
         </Drawer>
         <AppBar
           title={<span className="title">Royal Rangers</span>}
-          onTitleTouchTap={() => this.gotoLink('/')}
           iconElementRight={this.isAdmin()}
           showMenuIconButton={false}
           />
