@@ -12,48 +12,64 @@ class AddUser extends Component {
       firstName: '',
       lastName: '',
       privelage: 'user',
-      emailError: ''
+      emailError: '',
+      passwordError: '',
+      firstNameError: '',
+      lastNameError: ''
     };
   }
 
   addUser(e) {
     e.preventDefault();
     let url = 'http://localhost:1337/api/signup';
-    if (!validateEmail(this.state.email)) {
-      return this.errorHandling('email');
-    }
-    let userFormData = {
-      email: this.state.email,
-      password: this.state.password,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      privelage: this.state.privelage 
-    }
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('RR')
-      },
-      body: JSON.stringify(userFormData)
-    })
-      .then(res => res)
-      .then(data => {
-        this.props.addUserToState(userFormData);
-      });
-
-      function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+    let errors = this.errorCheck();
+    if (!errors) {
+      let userFormData = {
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        privelage: this.state.privelage 
+      }
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('RR')
+        },
+        body: JSON.stringify(userFormData)
+      })
+        .then(res => res)
+        .then(data => {
+          this.props.addUserToState(userFormData);
+        });
     }
   }
 
-  errorHandling(error) {
-    if (error === 'email') {
-      this.setState({
-        emailError: 'Please enter a valid e-mail'
-      })
+  errorCheck() {
+    let errorObj = {};
+    !validateEmail(this.state.email) ? errorObj.email = true : errorObj.email = false;
+    this.state.password.length < 8 ? errorObj.password = true : errorObj.password = false;
+    this.state.firstName.length === 0 ? errorObj.firstName = true : errorObj.firstName = false;
+    this.state.lastName.length === 0 ? errorObj.lastName = true : errorObj.lastName = false;
+    errorHandling.call(this, errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key] === true) {
+        return true;
+      }
+    }
+
+    function validateEmail(email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+    
+    function errorHandling (obj) {
+      obj.email ? this.setState({emailError: 'Please enter a valid e-mail.'}) : this.setState({emailError: ''});
+      obj.password ? this.setState({passwordError: 'Password must be greater then 8 characters.'}) : this.setState({passwordError: ''});
+      obj.firstName ? this.setState({firstNameError: 'Must contain more then 1 character.'}) : this.setState({firstNameError: ''});
+      obj.lastName ? this.setState({lastNameError: 'Must contain more then 1 character.'}) : this.setState({lastNameError: ''});
     }
   }
 
@@ -73,6 +89,7 @@ class AddUser extends Component {
           <TextField
             hintText="E-mail"
             floatingLabelText="E-mail"
+            errorStyle={{float: "left"}}
             errorText={this.state.emailError}
             value={this.state.email}
             onChange={(e) => this.handleInput(e, 'email')}
@@ -81,20 +98,25 @@ class AddUser extends Component {
             hintText="Password"
             floatingLabelText="Password"
             type="password"
+            errorStyle={{float: "left"}}
+            errorText={this.state.passwordError}
             value={this.state.password}
             onChange={(e) => this.handleInput(e, 'password')}
-          />
-          <br />
+          /><br />
           <TextField
             hintText="First Name"
             floatingLabelText="First Name"
+            errorStyle={{float: "left"}}
             value={this.state.firstName}
+            errorText={this.state.firstNameError}
             onChange={(e) => this.handleInput(e, 'firstName')}
           />
           <TextField
             hintText="Last Name"
             floatingLabelText="Last Name"
+            errorStyle={{float: "left"}}
             value={this.state.lastName}
+            errorText={this.state.lastNameError}
             onChange={(e) => this.handleInput(e, 'lastName')}
           /><br />
           <SelectField
