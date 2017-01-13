@@ -50,7 +50,7 @@ module.exports = {
   },
 
   changePassword: (req, res, next) => {
-    const username = req.user.email;
+    const email = req.user.email;
     User.findOne({ email: email })
       .then((user) => {
         helper.comparePasswords(req.body.password, user.password)
