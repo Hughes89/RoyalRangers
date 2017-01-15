@@ -16,7 +16,7 @@ class Login extends Component {
 
   signin(e) {
     e.preventDefault();
-    let url = 'https://royalrangers.herokuapp.com/api/signin';
+    let url = 'http://royalrangers.herokuapp.com/api/signin';
     fetch(url, {
       method: 'POST',
       headers: {
@@ -34,6 +34,7 @@ class Login extends Component {
         } else if (res.status === 404) {
           this.unknownEmail();
         } else {
+          console.log(res)
           return res.json();
         }})
       .then(data => {

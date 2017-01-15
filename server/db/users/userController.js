@@ -6,6 +6,7 @@ const secret = process.env.secret;
 
 module.exports = {
   signup: (req, res, next) => {
+    console.log(req.body);
     const email = req.body.email.toLowerCase();
     const password = helper.hashPassword(req.body.password)
       .then(data => {
