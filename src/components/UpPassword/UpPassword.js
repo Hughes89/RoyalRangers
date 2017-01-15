@@ -68,8 +68,7 @@ class UpPassword extends Component {
             errorText={this.state.passwordError}
             errorStyle={{float: "left"}}
             value={this.state.password}
-            onChange={(e) => this.handleInput(e, 'password')}
-            /><br />
+            onChange={(e) => this.handleInput(e, 'password')} /><br />
           <TextField
             hintText="New Password"
             floatingLabelText="New Password"
@@ -77,8 +76,7 @@ class UpPassword extends Component {
             errorStyle={{float: "left"}}
             errorText={this.state.newPasswordError}
             value={this.state.newPassword}
-            onChange={(e) => this.handleInput(e, 'newPassword')}
-          /><br />
+            onChange={(e) => this.handleInput(e, 'newPassword')} /><br /><br />
           <FlatButton type="submit" label="Change Password" onClick={(e) => this.changePass(e)} />
         </form>
       </div>

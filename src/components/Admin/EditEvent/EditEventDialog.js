@@ -9,7 +9,9 @@ class EditEventDialog extends Component {
     this.state = {
       id: props.event._id,
       title: props.event.title,
+      titleError: '',
       description: props.event.description,
+      descriptionError: ''
     };
   }
 
@@ -22,26 +24,46 @@ class EditEventDialog extends Component {
 
   editEvent = (e) => {
     e.preventDefault();
-    let eventFormData = {
-      id: this.state.id,
-      title: this.state.title,
-      description: this.state.description,
-    };
-    const url = 'http://localhost:1337/api/update/event';
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('RR')
-      },
-      body: JSON.stringify(eventFormData)
-    })
-      .then(res => res)
-      .then(data => {
-        this.props.updateEventState(eventFormData);
-        this.props.handleDialog();
-      });
+    const error = this.errorCheck();
+    if (!error) {
+      let eventFormData = {
+        id: this.state.id,
+        title: this.state.title,
+        description: this.state.description,
+      };
+      const url = 'http://localhost:1337/api/update/event';
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('RR')
+        },
+        body: JSON.stringify(eventFormData)
+      })
+        .then(res => res)
+        .then(data => {
+          this.props.updateEventState(eventFormData);
+          this.props.handleDialog();
+        });
+    }
+  }
+
+  errorCheck() {
+    let errorObj = {};
+    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
+    this.state.description.length < 1 ? errorObj.description = true : errorObj.description = false;
+    errorHandling.call(this, errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key] === true) {
+        return true;
+      }
+    }
+
+    function errorHandling (obj) {
+      obj.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
+      obj.description ? this.setState({descriptionError: 'Please enter a description.'}) : this.setState({descriptionError: ''});
+    }
   }
 
   
@@ -53,6 +75,8 @@ class EditEventDialog extends Component {
             hintText="Title"
             floatingLabelText="Title"
             value={this.state.title}
+            errorText={this.state.titleError}
+            errorStyle={{float: "left"}}
             onChange={(e) => this.handleInput(e, 'title')}
             fullWidth={true} />
           <br />
@@ -61,6 +85,8 @@ class EditEventDialog extends Component {
             floatingLabelText="Description"
             multiLine={true}
             value={this.state.description}
+            errorText={this.state.descriptionError}
+            errorStyle={{float: "left"}}
             onChange={(e) => this.handleInput(e, 'description')}
             fullWidth={true} />
           <div className="center">

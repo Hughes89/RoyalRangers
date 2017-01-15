@@ -10,30 +10,11 @@ class About extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getAboutData();
-  }
-
-  getAboutData() {
-    let url = 'http://localhost:1337/api/about';
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('RR')
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          body: data.content
-        });
-      });
-  }
-
   render() {
     return (
       <div className="About">
-      <p>{this.state.body}</p>
+        Test Album:<br />
+        <a data-flickr-embed="true"  href="https://www.flickr.com/gp/147589952@N05/9P5f7g" title="Test Album"><img src="https://c1.staticflickr.com/6/5786/31465306724_1295de468c_m.jpg" width="240" height="240" alt="Test" /></a><script async src="https://embedr.flickr.com/assets/client-code.js" charSet="utf-8"></script>
       </div>
     );
   }

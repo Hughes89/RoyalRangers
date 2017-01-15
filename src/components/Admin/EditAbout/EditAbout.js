@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { TextField, RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
+import keys from './cloudKeys';
 
 import './EditAbout.css';
 
@@ -11,42 +12,16 @@ class EditAbout extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getAboutData();
-  }
-
-  getAboutData() {
-    let url = 'http://localhost:1337/api/about';
-    fetch(url, {method: 'GET'})
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          body: data.content
-        });
-      });
-  }
-
-  handleInput(e, state) {
-    let value = e.target.value;
-    this.setState({
-      [state]: value
-    });
+  openGalleryWidget() {
+    window.$.cloudinary.config({ cloud_name: keys.cloud_name, api_key: keys.api_key});
   }
 
   render() {
     return (
       <div className="Edit-About">
-      <TextField
-        value={this.state.body}
-          hintText="About us Content"
-          floatingLabelText="About us Content"
-          fullWidth={true}
-          multiLine={true}     
-          onChange={(e) => this.handleInput(e, 'body')}   
-      /><br />
-      <div className="button-align">
-        <RaisedButton label="Update" primary={true} />
-      </div>
+        <input name="file" type="file" 
+        className="cloudinary-fileupload" data-cloudinary-field="image_id" 
+        data-form-data="--signedData--" />
       </div>
     );
   }
