@@ -17,7 +17,7 @@ class EditHome extends Component {
   }
 
   getHomeData() {
-    let url = 'http://localhost:1337/api/home';
+    let url = 'https://royalrangers.herokuapp.com/api/home';
     fetch(url, {method: 'GET'})
       .then(res => res.json())
       .then(data => {

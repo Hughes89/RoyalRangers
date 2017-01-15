@@ -19,7 +19,7 @@ class Navbar extends Component {
   }
 
   isLoggedIn() {
-    const url = 'http://localhost:1337/api/privelage';
+    const url = 'https://royalrangers.herokuapp.com/api/privelage';
     if (localStorage.getItem('RR') !== null) {
       fetch(url, {
         method: 'GET',

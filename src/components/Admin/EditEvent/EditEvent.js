@@ -15,7 +15,7 @@ class EditEvent extends React.Component {
   removeEvent(id) {
     const accept = confirm('Are you sure you want to delete this event?');
     if (accept) {
-      let url = 'http://localhost:1337/api/remove/event';
+      let url = 'https://royalrangers.herokuapp.com/api/remove/event';
       fetch(url, {
         method: 'DELETE',
         headers: {

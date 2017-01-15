@@ -24,7 +24,7 @@ class UpPassword extends Component {
       });
       return;
     }
-    let url = 'http://localhost:1337/api/password';
+    let url = 'https://royalrangers.herokuapp.com/api/password';
     fetch(url, {
       method: 'PUT',
       headers: {

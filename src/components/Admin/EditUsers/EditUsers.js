@@ -18,7 +18,7 @@ class editUsers extends Component {
   }
 
   getUsersData() {
-    let url = 'http://localhost:1337/api/users';
+    let url = 'https://royalrangers.herokuapp.com/api/users';
     fetch(url, {
       method: 'GET',
       headers: {

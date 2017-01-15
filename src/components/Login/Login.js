@@ -16,7 +16,7 @@ class Login extends Component {
 
   signin(e) {
     e.preventDefault();
-    let url = 'http://localhost:1337/api/signin';
+    let url = 'https://royalrangers.herokuapp.com/api/signin';
     fetch(url, {
       method: 'POST',
       headers: {

@@ -21,7 +21,7 @@ class AddUser extends Component {
 
   addUser(e) {
     e.preventDefault();
-    let url = 'http://localhost:1337/api/signup';
+    let url = 'https://royalrangers.herokuapp.com/api/signup';
     let errors = this.errorCheck();
     if (!errors) {
       let userFormData = {
@@ -64,7 +64,7 @@ class AddUser extends Component {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
-    
+
     function errorHandling (obj) {
       obj.email ? this.setState({emailError: 'Please enter a valid e-mail.'}) : this.setState({emailError: ''});
       obj.password ? this.setState({passwordError: 'Password must be greater then 8 characters.'}) : this.setState({passwordError: ''});

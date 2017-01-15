@@ -67,7 +67,7 @@ class AddEvent extends Component {
         start: `${this.state.startDate} ${this.state.startTime}`,
         end: `${this.state.endDate} ${this.state.endTime}`
       };
-      const url = 'http://localhost:1337/api/add/event';
+      const url = 'https://royalrangers.herokuapp.com/api/add/event';
       fetch(url, {
         method: 'POST',
         headers: {

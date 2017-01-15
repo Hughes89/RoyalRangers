@@ -8,7 +8,7 @@ class EditUser extends React.Component {
   removeUser(id) {
     const accept = confirm('Are you sure you want to delete this user?');
     if (accept) {
-      let url = 'http://localhost:1337/api/remove/user';
+      let url = 'https://royalrangers.herokuapp.com/api/remove/user';
       fetch(url, {
         method: 'DELETE',
         headers: {

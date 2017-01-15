@@ -40,7 +40,7 @@ const router = (
 render(router, document.getElementById('root'));
 
 function authenticateAdmin() {
-  const url = 'http://localhost:1337/api/privelage';
+  const url = 'https://royalrangers.herokuapp.com/api/privelage';
   if (localStorage.getItem('RR')) {
     fetch(url, {
       method: 'GET',
@@ -60,7 +60,7 @@ function authenticateAdmin() {
 }
 
 function authenticateUser() {
-  const url = 'http://localhost:1337/api/privelage';
+  const url = 'https://royalrangers.herokuapp.com/api/privelage';
   if (localStorage.getItem('RR')) {
     fetch(url, {
       method: 'GET',

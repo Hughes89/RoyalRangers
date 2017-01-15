@@ -31,7 +31,7 @@ class EditEventDialog extends Component {
         title: this.state.title,
         description: this.state.description,
       };
-      const url = 'http://localhost:1337/api/update/event';
+      const url = 'https://royalrangers.herokuapp.com/api/update/event';
       fetch(url, {
         method: 'PUT',
         headers: {
