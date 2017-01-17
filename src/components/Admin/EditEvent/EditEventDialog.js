@@ -11,7 +11,7 @@ class EditEventDialog extends Component {
       title: props.event.title,
       titleError: '',
       description: props.event.description,
-      descriptionError: ''
+      location: props.event.location
     };
   }
 
@@ -30,8 +30,9 @@ class EditEventDialog extends Component {
         id: this.state.id,
         title: this.state.title,
         description: this.state.description,
+        location: this.state.location
       };
-      const apiRoute = this.props.route.api;
+      const apiRoute = this.props.api;
       const url = apiRoute + '/api/update/event';
       fetch(url, {
         method: 'PUT',
@@ -77,8 +78,7 @@ class EditEventDialog extends Component {
             errorText={this.state.titleError}
             errorStyle={{float: "left"}}
             onChange={(e) => this.handleInput(e, 'title')}
-            fullWidth={true} />
-          <br />
+            fullWidth={true} /><br />
           <TextField
             hintText="Notes"
             floatingLabelText="Notes"
@@ -86,6 +86,14 @@ class EditEventDialog extends Component {
             value={this.state.description}
             errorStyle={{float: "left"}}
             onChange={(e) => this.handleInput(e, 'description')}
+            fullWidth={true} /><br />
+          <TextField
+            hintText="Location"
+            floatingLabelText="Location"
+            multiLine={true}
+            value={this.state.location}
+            errorStyle={{float: "left"}}
+            onChange={(e) => this.handleInput(e, 'location')}
             fullWidth={true} />
           <div className="center">
           <FlatButton 
