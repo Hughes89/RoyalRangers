@@ -6,7 +6,6 @@ const secret = process.env.secret;
 
 module.exports = {
   signup: (req, res, next) => {
-    console.log(req.body);
     const email = req.body.email.toLowerCase();
     const password = helper.hashPassword(req.body.password)
       .then(data => {
@@ -37,6 +36,9 @@ module.exports = {
       .then((user) => {
         if (!user) {
           return res.sendStatus(404);
+        }
+        if (user.pending) {
+          return res.sendStatus(403);
         }
         helper.comparePasswords(req.body.password, user.password)
           .then(function (foundUser) {
@@ -100,6 +102,14 @@ module.exports = {
         } else {
           res.sendStatus(200);
         }
+      });
+  },
+
+  addPendingUser: (req, res, next) => {
+    const id = req.body.id;
+    User.findOneAndUpdate({ _id: id }, { pending: false }, { new:true })
+      .then((user) => {
+        res.sendStatus(200);
       });
   }
 };
