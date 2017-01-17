@@ -52,17 +52,12 @@ class EditEventDialog extends Component {
   }
 
   errorCheck() {
-    let errorObj = {};
-    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
-    errorHandling.call(this, errorObj);
-    for (let key in errorObj) {
-      if (errorObj[key] === true) {
-        return true;
-      }
-    }
-
-    function errorHandling (obj) {
-      obj.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
+    if (this.state.title.length < 1) {
+      this.setState({titleError: 'Please enter a title.'});
+      return true;
+    } else {
+      this.setState({titleError: ''});
+      return false;
     }
   }
 
