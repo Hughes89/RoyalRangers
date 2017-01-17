@@ -8,6 +8,7 @@ module.exports = {
     Events.create({
       title: req.body.title,
       description: req.body.description,
+      location: req.body.location,
       start: req.body.start,
       end: req.body.end })
       .then(event => res.sendStatus(201))

@@ -16,7 +16,8 @@ class Login extends Component {
 
   signin(e) {
     e.preventDefault();
-    let url = 'http://royalrangers.herokuapp.com/api/signin';
+    const apiRoute = this.props.route.api;
+    let url = apiRoute + '/api/signin';
     fetch(url, {
       method: 'POST',
       headers: {
@@ -34,7 +35,6 @@ class Login extends Component {
         } else if (res.status === 404) {
           this.unknownEmail();
         } else {
-          console.log(res)
           return res.json();
         }})
       .then(data => {

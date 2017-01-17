@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div>
       <div className="content">
-        <Navbar location={location} />
+        <Navbar location={location} api={this.props.route.api} />
           {this.props.children}
       </div>
       <Footer />

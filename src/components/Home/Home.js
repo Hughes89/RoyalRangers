@@ -16,7 +16,8 @@ class Home extends Component {
   }
 
   getHomeData() {
-    let url = 'https://royalrangers.herokuapp.com/api/home';
+    const apiRoute = this.props.route.api;
+    let url = apiRoute + '/api/home';
     fetch(url, {method: 'GET'})
       .then(res => res.json())
       .then(data => {

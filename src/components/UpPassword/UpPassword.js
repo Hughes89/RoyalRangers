@@ -16,7 +16,14 @@ class UpPassword extends Component {
   }
 
   changePass(e) {
+    const apiRoute = this.props.route.api;
     e.preventDefault();
+    if (this.state.password.length < 1) {
+      this.setState({
+        passwordError: 'Please enter your current password.'
+      });
+      return;
+    }
     if (this.state.newPassword.length < 8) {
       this.setState({
         newPasswordError: 'Password must be greater then 8 characters.',
@@ -24,7 +31,7 @@ class UpPassword extends Component {
       });
       return;
     }
-    let url = 'https://royalrangers.herokuapp.com/api/password';
+    let url = apiRoute + '/api/password';
     fetch(url, {
       method: 'PUT',
       headers: {
@@ -38,15 +45,21 @@ class UpPassword extends Component {
       })
     })
       .then(res => {
+        console.log(res)
         if (res.status === 401) {
           this.setState({
             passwordError: 'Incorrect password.',
             newPasswordError: ''
           })
-        }})
-      .then(data => {
-        browserHistory.push('/');
+        }
+        if (res.status === 200) {
+          browserHistory.push('/');
+        }
       });
+      // .then(data => {
+      // console.log(data);
+      //   //browserHistory.push('/');
+      // });
   }
 
   handleInput(e, state) {

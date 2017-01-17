@@ -31,7 +31,8 @@ class EditEventDialog extends Component {
         title: this.state.title,
         description: this.state.description,
       };
-      const url = 'https://royalrangers.herokuapp.com/api/update/event';
+      const apiRoute = this.props.route.api;
+      const url = apiRoute + '/api/update/event';
       fetch(url, {
         method: 'PUT',
         headers: {
@@ -52,7 +53,6 @@ class EditEventDialog extends Component {
   errorCheck() {
     let errorObj = {};
     this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
-    this.state.description.length < 1 ? errorObj.description = true : errorObj.description = false;
     errorHandling.call(this, errorObj);
     for (let key in errorObj) {
       if (errorObj[key] === true) {
@@ -62,7 +62,6 @@ class EditEventDialog extends Component {
 
     function errorHandling (obj) {
       obj.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
-      obj.description ? this.setState({descriptionError: 'Please enter a description.'}) : this.setState({descriptionError: ''});
     }
   }
 
@@ -81,11 +80,10 @@ class EditEventDialog extends Component {
             fullWidth={true} />
           <br />
           <TextField
-            hintText="Description"
-            floatingLabelText="Description"
+            hintText="Notes"
+            floatingLabelText="Notes"
             multiLine={true}
             value={this.state.description}
-            errorText={this.state.descriptionError}
             errorStyle={{float: "left"}}
             onChange={(e) => this.handleInput(e, 'description')}
             fullWidth={true} />

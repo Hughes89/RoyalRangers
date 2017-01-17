@@ -21,7 +21,6 @@ class AddUser extends Component {
 
   addUser(e) {
     e.preventDefault();
-    let url = 'https://royalrangers.herokuapp.com/api/signup';
     let errors = this.errorCheck();
     if (!errors) {
       let userFormData = {
@@ -31,6 +30,8 @@ class AddUser extends Component {
         lastName: this.state.lastName,
         privelage: this.state.privelage 
       }
+      const apiRoute = this.props.route.api;
+      let url = apiRoute + '/api/signup';
       fetch(url, {
         method: 'POST',
         headers: {

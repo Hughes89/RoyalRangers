@@ -24,7 +24,8 @@ class Events extends Component {
   }
 
   getEventsData() {
-    let url = 'https://royalrangers.herokuapp.com/api/events';
+    const apiRoute = this.props.route.api;
+    let url = apiRoute + '/api/events';
     fetch(url, {
       method: 'GET',
       headers: {

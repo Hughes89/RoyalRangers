@@ -10,7 +10,7 @@ class AddEvent extends Component {
       title: '',
       titleError: '',
       description: '',
-      descriptionError: '',
+      location: '',
       startDate: null,
       startDateError: null,
       endDate: null,
@@ -64,10 +64,12 @@ class AddEvent extends Component {
       let eventFormData = {
         title: this.state.title,
         description: this.state.description,
+        location: this.state.location,
         start: `${this.state.startDate} ${this.state.startTime}`,
         end: `${this.state.endDate} ${this.state.endTime}`
       };
-      const url = 'https://royalrangers.herokuapp.com/api/add/event';
+      const apiRoute = this.props.route.api;
+      let url = apiRoute + 'api/add/event';
       fetch(url, {
         method: 'POST',
         headers: {
@@ -87,7 +89,6 @@ class AddEvent extends Component {
   errorCheck() {
     let errorObj = {};
     this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
-    this.state.description.length < 1 ? errorObj.description = true : errorObj.description = false;
     this.state.startDate === null ? errorObj.startDate = true : errorObj.startDate = false;
     this.state.endDate === null ? errorObj.endDate = true : errorObj.endDate = false;
     this.state.startTime === null ? errorObj.startTime = true : errorObj.startTime = false;
@@ -101,7 +102,6 @@ class AddEvent extends Component {
 
     function errorHandling (obj) {
       obj.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
-      obj.description ? this.setState({descriptionError: 'Please enter a description.'}) : this.setState({descriptionError: ''});
       obj.startDate ? this.setState({startDateError: 'Must contain a start date.'}) : this.setState({startDateError: ''});
       obj.startTime ? this.setState({startTimeError: 'Must contain a start time.'}) : this.setState({startTimeError: ''});
       obj.endDate ? this.setState({endDateError: 'Must contain a end date.'}) : this.setState({endDateError: ''});
@@ -125,13 +125,20 @@ class AddEvent extends Component {
             fullWidth={true} />
           <br />
           <TextField
-            hintText="Description"
-            floatingLabelText="Description"
+            hintText="Notes"
+            floatingLabelText="Notes"
             multiLine={true}
-            errorText={this.state.descriptionError}
             errorStyle={{float: "left"}}
             value={this.state.description}
             onChange={(e) => this.handleInput(e, 'description')}
+            fullWidth={true} />
+            <TextField
+            hintText="Location"
+            floatingLabelText="Location"
+            multiLine={true}
+            errorStyle={{float: "left"}}
+            value={this.state.location}
+            onChange={(e) => this.handleInput(e, 'location')}
             fullWidth={true} />
           <div className="center">
           <strong>Start Date:</strong> <DatePicker 

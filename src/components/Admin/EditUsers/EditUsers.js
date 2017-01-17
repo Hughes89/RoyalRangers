@@ -18,7 +18,8 @@ class editUsers extends Component {
   }
 
   getUsersData() {
-    let url = 'https://royalrangers.herokuapp.com/api/users';
+    const apiRoute = this.props.route.api;
+    let url = apiRoute + '/api/users';
     fetch(url, {
       method: 'GET',
       headers: {
