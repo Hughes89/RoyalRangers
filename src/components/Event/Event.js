@@ -1,9 +1,9 @@
 import React from 'react';
 import Moment from 'react-moment';
-import { Divider } from 'material-ui';
 
 
 class Event extends React.Component {
+
   description() {
     if (this.props.event.description) {
       return (
