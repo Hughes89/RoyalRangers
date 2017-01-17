@@ -12,25 +12,27 @@ import EditEvents from './components/Admin/EditEvents/EditEvents';
 import EditAbout from './components/Admin/EditAbout/EditAbout';
 import EditUsers from './components/Admin/EditUsers/EditUsers';
 import UpPassword from './components/UpPassword/UpPassword';
+import apiRoute from './apiRoute'
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+const api = apiRoute.dev;
+
 const router = (
   <MuiThemeProvider>
   <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/events" component={Events} onEnter={authenticateUser} />
-      <Route path="/login" component={Login} />
-      <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} />
-      <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} />
-      <Route path='/update/about' component={EditAbout} onEnter={authenticateAdmin} />
-      <Route path='/update/users' component={EditUsers} onEnter={authenticateAdmin} />
-      <Route path='/update/pass' component={UpPassword} />
-      <Route path='*' component={NotFound} />
+    <Route path="/" component={App} api={api} >
+      <IndexRoute component={Home} api={api} />
+      <Route path="/events" component={Events} onEnter={authenticateUser} api={api} />
+      <Route path="/login" component={Login} api={api} />
+      <Route path='/about' component={About} onEnter={authenticateUser} api={api} />
+      <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} api={api} />
+      <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} api={api} />
+      <Route path='/update/users' component={EditUsers} onEnter={authenticateAdmin} api={api} />
+      <Route path='/update/pass' component={UpPassword} api={api} />
+      <Route path='*' component={NotFound} api={api} />
     </Route>
   </Router>
   </MuiThemeProvider>
