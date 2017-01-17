@@ -15,7 +15,7 @@ class EditEvent extends React.Component {
   removeEvent(id) {
     const accept = confirm('Are you sure you want to delete this event?');
     if (accept) {
-      const apiRoute = this.props.route.api;
+      const apiRoute = this.props.api;
       let url = apiRoute + '/api/remove/event';
       fetch(url, {
         method: 'DELETE',
@@ -41,7 +41,7 @@ class EditEvent extends React.Component {
   }
 
   render() {
-    const { event, i, updateEventState } = this.props;
+    const { event, i, updateEventState, api } = this.props;
     event.start = new Date(event.start);
     event.end = new Date(event.end);
     const action = [
@@ -72,7 +72,7 @@ class EditEvent extends React.Component {
           onRequestClose={this.handleDialog}
           autoScrollBodyContent={true}
           >
-          <EditEventDialog event={event} updateEventState={updateEventState} handleDialog={this.handleDialog} />
+          <EditEventDialog event={event} updateEventState={updateEventState} handleDialog={this.handleDialog} api={api}/>
         </Dialog>
       </div>
     );

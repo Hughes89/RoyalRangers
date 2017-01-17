@@ -61,11 +61,11 @@ class EditEvents extends Component {
     if (this.state.manage) {
       return this.state.body.map((event, i) => {
         return (
-          <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} />
+          <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
       )})
     } else {
       return (
-        <AddEvent addEventToState={this.addEventToState} />
+        <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
         )
     }
   }
