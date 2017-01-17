@@ -68,8 +68,8 @@ class AddEvent extends Component {
         start: `${this.state.startDate} ${this.state.startTime}`,
         end: `${this.state.endDate} ${this.state.endTime}`
       };
-      const apiRoute = this.props.route.api;
-      let url = apiRoute + 'api/add/event';
+      const apiRoute = this.props.api;
+      let url = apiRoute + '/api/add/event';
       fetch(url, {
         method: 'POST',
         headers: {
