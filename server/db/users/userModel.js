@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  pending: {
+    type: Boolean
+  },
   salt: String,
 });
 
