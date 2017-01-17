@@ -30,7 +30,7 @@ class AddUser extends Component {
         lastName: this.state.lastName,
         privelage: this.state.privelage 
       }
-      const apiRoute = this.props.route.api;
+      const apiRoute = this.props.api;
       let url = apiRoute + '/api/signup';
       fetch(url, {
         method: 'POST',

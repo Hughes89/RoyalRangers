@@ -52,11 +52,11 @@ class editUsers extends Component {
     if (this.state.manage) {
       return this.state.body.map((user, i) => {
         return (
-          <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} />
+          <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
       )})
     } else {
       return (
-        <AddUser addUserToState={this.addUserToState} />
+        <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
         )
     }
   }
