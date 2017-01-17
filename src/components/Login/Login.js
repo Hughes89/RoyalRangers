@@ -10,7 +10,8 @@ class Login extends Component {
       email: '',
       password: '',
       emailError: '',
-      passwordError: ''
+      passwordError: '',
+      pendError: ''
     };
   }
 
@@ -34,8 +35,10 @@ class Login extends Component {
           this.incorrectPassword();
         } else if (res.status === 404) {
           this.unknownEmail();
+        } else if (res.status === 403) {
+          this.pendingUser();
         } else {
-          return res.json();
+          res.json();
         }})
       .then(data => {
         if (data) {
@@ -48,15 +51,25 @@ class Login extends Component {
   incorrectPassword() {
     this.setState({
       passwordError: 'Incorrect Password',
-      emailError: ''
+      emailError: '',
+      pendError: '',
     })
   }
 
   unknownEmail() {
     this.setState({
       emailError: 'Incorrect E-mail',
-      passwordError: ''
+      passwordError: '',
+      pendError: ''
     })
+  }
+
+  pendingUser() {
+    this.setState({
+      pendError: 'This user is still waiting on activation.',
+      emailError: '',
+      passwordError: ''
+    });
   }
 
   handleInput(e, state) {
@@ -75,6 +88,7 @@ class Login extends Component {
               floatingLabelText="E-mail"
               value={this.state.email}
               onChange={(e) => this.handleInput(e, 'email')}
+              errorStyle={{float: "left"}}
               errorText={this.state.emailError}
               /><br />
             <TextField
@@ -83,9 +97,11 @@ class Login extends Component {
               type="password"
               value={this.state.password}
               onChange={(e) => this.handleInput(e, 'password')}
+              errorStyle={{float: "left"}}
               errorText={this.state.passwordError}
             /><br />
             <FlatButton type="submit" label="Sign in" onClick={(e) => this.signin(e)} />
+            <div style={{color: 'red'}} >{this.state.pendError}</div>
           </form>
         </div>
     );
