@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import EditEvent from '../EditEvent/EditEvent';
 import AddEvent from '../AddEvent/AddEvent';
 import { Tab, Tabs } from 'material-ui';
-import SwipeableViews from 'react-swipeable-views';
-import './EditEvents.css';
 
+import './EditEvents.css';
 
 class EditEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      manage: true,
       body: [],
       slideIndex: 1
     };
@@ -50,24 +48,18 @@ class EditEvents extends Component {
   };
 
   updateEventState = (updated) => {
-    this.state.body.map(event => {
+    this.state.body.forEach(event => {
       if (event._id === updated.id) {
         event.title = updated.title;
         event.description = updated.description;
+        event.loaction = updated.location;
       }
     });
   };
 
-
   manageEvents = (value) => {
     this.setState({
       slideIndex: value
-    });
-  };
-
-  viewClick = () => {
-    this.setState({
-      manage: !this.state.manage
     });
   };
 
@@ -82,7 +74,8 @@ class EditEvents extends Component {
             <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
           </Tab>
           <Tab label="Manage Events" value={1}>
-            {this.state.body.map((event, i) => <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
+            {this.state.body.map((event, i) => 
+              <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
             )}
           </Tab>
         </Tabs>
