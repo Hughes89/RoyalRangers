@@ -39,7 +39,7 @@ class EditUser extends React.Component {
             <strong>Privelage:</strong> {user.privelage}
           </p>
           <div className="center-button">
-          <RaisedButton label="Delete User" onClick={this.removeUser} primary={true} />
+            <RaisedButton label="Delete User" onClick={this.removeUser} primary={true} />
           </div>
         </CardText>
       </Card>

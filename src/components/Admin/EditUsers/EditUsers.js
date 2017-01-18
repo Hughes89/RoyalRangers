@@ -22,7 +22,7 @@ class editUsers extends Component {
 
   getUsersData() {
     const apiRoute = this.props.route.api;
-    let url = apiRoute + '/api/users';
+    const url = apiRoute + '/api/users';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -63,7 +63,6 @@ class editUsers extends Component {
       slideIndex: value
     });
   };
-
 
   render() {
     return (
