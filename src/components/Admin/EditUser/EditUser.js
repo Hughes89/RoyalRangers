@@ -5,27 +5,24 @@ import './EditUser.css';
 
 class EditUser extends React.Component {
 
-  removeUser(id) {
+  removeUser = () => {
     const accept = confirm('Are you sure you want to delete this user?');
     if (accept) {
+      const id = this.props.user._id;
       const apiRoute = this.props.api;
-      let url = apiRoute + '/api/remove/user';
+      const url = apiRoute + '/api/remove/user';
       fetch(url, {
         method: 'DELETE',
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('RR'),
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          id: id
-        })
+        body: JSON.stringify({id})
       })
         .then(res => res)
-        .then(data => {
-          this.props.removeUserFromState(id);
-        });
+        .then(data => this.props.removeUserFromState(id));
     }
-  }
+  };
   
   render() {
     const { user, i } = this.props;
@@ -33,13 +30,17 @@ class EditUser extends React.Component {
       <div className="Edit-User" id={i}>
       <div className="User-Container">
       <Card>
-        <CardText>
+        <CardText style={{padding: '20px'}} >
           <p>
-            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}<br />
-            <strong>E-mail:</strong> {user.email} <br />
+            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}
+            <br />
+            <strong>E-mail:</strong> {user.email}
+            <br />
             <strong>Privelage:</strong> {user.privelage}
           </p>
-          <RaisedButton label="Delete User" onClick={(e) => this.removeUser(user._id)}/>
+          <div className="center-button">
+          <RaisedButton label="Delete User" onClick={this.removeUser} primary={true} />
+          </div>
         </CardText>
       </Card>
       </div>
