@@ -52,18 +52,23 @@ class Navbar extends Component {
   isAdmin() {
     if (this.state.user && this.state.admin) {
       return (
-        <span>
-        <FlatButton style={{color: 'white'}} label="Admin Dashboard" onClick={this.handleButton}></FlatButton>
-        <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} ></FlatButton>
-        </span> )
+        <div>
+          <FlatButton style={{color: 'white'}} label="Admin Dashboard" onClick={this.handleButton} />
+          <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} />
+        </div> )
     } else if (this.state.user && !this.state.admin) {
       return (
-        <span>
-        <FlatButton style={{color: 'white'}} label="Update Password" onClick={() => this.gotoLink('/update/pass')}></FlatButton>
-        <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} ></FlatButton>
-        </span> )
+        <div>
+          <FlatButton style={{color: 'white'}} label="Update Password" onClick={() => this.gotoLink('/update/pass')} />
+          <FlatButton style={{color: 'white'}} label="Logout" onClick={this.logout} />
+        </div> )
     } else if (!this.state.user && !this.state.admin) {
-      return <FlatButton label="Sign in to view full site" onClick={this.handleButton.bind(this)} />
+      return (
+        <div>
+          <FlatButton style={{color: 'white'}} label="Sign in to view full site" onClick={this.handleButton.bind(this)} />
+          <FlatButton style={{color: 'white'}} label="Sign Up" />
+        </div>
+         )
     }
   }
 
