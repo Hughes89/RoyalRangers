@@ -122,6 +122,7 @@ class Navbar extends Component {
         </Drawer>
         <AppBar
           title={<span className="title">Royal Rangers</span>}
+          onTitleTouchTap={() => this.gotoLink('/')}
           iconElementRight={this.isAdmin()}
           showMenuIconButton={false}
           />
