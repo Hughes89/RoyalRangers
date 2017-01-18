@@ -160,7 +160,8 @@ class AddEvent extends Component {
             name="title"
             onChange={this.handleInput}
             autoComplete="off"
-            fullWidth={true} />
+            fullWidth={true} 
+          />
           <br />
           <TextField
             hintText="Notes"
@@ -171,7 +172,8 @@ class AddEvent extends Component {
             name="description"
             autoComplete="off"
             onChange={this.handleInput}
-            fullWidth={true} />
+            fullWidth={true} 
+          />
           <TextField
             hintText="Location"
             floatingLabelText="Location"
@@ -181,7 +183,8 @@ class AddEvent extends Component {
             name="location"
             autoComplete="off"
             onChange={this.handleInput}
-            fullWidth={true} />
+            fullWidth={true} 
+          />
           <div className="center">
           <strong>Start Date:</strong> 
           <DatePicker 
@@ -191,7 +194,8 @@ class AddEvent extends Component {
             errorStyle={{float: "left"}}
             value={this.state.startDate}
             style={{display: 'inline-block'}}
-            onChange={this.handleStartDate} />
+            onChange={this.handleStartDate} 
+          />
           <strong>Start Time:</strong> 
           <TimePicker
             format="ampm"
@@ -200,7 +204,8 @@ class AddEvent extends Component {
             errorText={this.state.startTimeError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
-            onChange={this.handleStartTime} />
+            onChange={this.handleStartTime} 
+          />
           <br />
           <strong>End Date:</strong>
           <DatePicker 
@@ -210,7 +215,8 @@ class AddEvent extends Component {
             errorText={this.state.endDateError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
-            onChange={this.handleEndDate} />
+            onChange={this.handleEndDate} 
+          />
           <strong>End Time:</strong> 
           <TimePicker
             format="ampm"
@@ -219,12 +225,10 @@ class AddEvent extends Component {
             errorText={this.state.endTimeError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
-            onChange={this.handleEndTime} />
+            onChange={this.handleEndTime} 
+          />
           <br />
-          <FlatButton 
-            type="submit" 
-            label="Create Event" 
-            onClick={this.addEvent} />
+          <FlatButton type="submit" label="Create Event" onClick={this.addEvent} />
           </div>
         </form>
         <Snackbar

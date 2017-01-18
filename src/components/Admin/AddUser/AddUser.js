@@ -123,7 +123,7 @@ class AddUser extends Component {
             name="email"
             autoComplete="off"
             onChange={this.handleInput}
-            />
+          />
           <TextField
             hintText="Password"
             floatingLabelText="Password"
@@ -134,7 +134,8 @@ class AddUser extends Component {
             name="password"
             autoComplete="off"
             onChange={this.handleInput}
-          /><br />
+          />
+          <br />
           <TextField
             hintText="First Name"
             floatingLabelText="First Name"
@@ -154,7 +155,8 @@ class AddUser extends Component {
             autoComplete="off"
             name="lastName"
             onChange={this.handleInput}
-          /><br />
+          />
+          <br />
           <SelectField
             value={this.state.privelage}
             onChange={this.handleChange}
