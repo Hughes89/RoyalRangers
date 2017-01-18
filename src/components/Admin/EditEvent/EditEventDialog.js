@@ -15,12 +15,13 @@ class EditEventDialog extends Component {
     };
   }
 
-  handleInput = (e, state) => {
+  handleInput = (e) => {
     let value = e.target.value;
+    let name = e.target.name;
     this.setState({
-      [state]: value
+      [name]: value
     });
-  }
+  };
 
   editEvent = (e) => {
     e.preventDefault();
@@ -72,29 +73,41 @@ class EditEventDialog extends Component {
             value={this.state.title}
             errorText={this.state.titleError}
             errorStyle={{float: "left"}}
-            onChange={(e) => this.handleInput(e, 'title')}
-            fullWidth={true} /><br />
+            name="title"
+            autoComplete="off"
+            onChange={this.handleInput}
+            fullWidth={true} 
+          />
+          <br />
           <TextField
             hintText="Notes"
             floatingLabelText="Notes"
             multiLine={true}
             value={this.state.description}
             errorStyle={{float: "left"}}
-            onChange={(e) => this.handleInput(e, 'description')}
-            fullWidth={true} /><br />
+            name="description"
+            autoComplete="off"
+            onChange={this.handleInput}
+            fullWidth={true} 
+          />
+          <br />
           <TextField
             hintText="Location"
             floatingLabelText="Location"
             multiLine={true}
             value={this.state.location}
             errorStyle={{float: "left"}}
-            onChange={(e) => this.handleInput(e, 'location')}
-            fullWidth={true} />
+            name="location"
+            autoComplete="off"
+            onChange={this.handleInput}
+            fullWidth={true} 
+          />
           <div className="center">
           <FlatButton 
             type="submit" 
             label="Update Event" 
-            onClick={this.editEvent} />
+            onClick={this.editEvent} 
+          />
           </div>
         </form>
       </div>
