@@ -45,10 +45,9 @@ class EditEvents extends Component {
 
   addEventToState = (event) => {
     this.setState({
-      body: this.state.body.concat(event),
-      manage: !this.state.manage,
+      body: this.state.body.concat(event)
     });
-  }
+  };
 
   updateEventState = (updated) => {
     this.state.body.map(event => {

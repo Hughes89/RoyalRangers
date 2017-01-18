@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, DatePicker, TimePicker } from 'material-ui';
+import { FlatButton, TextField, DatePicker, TimePicker, Snackbar } from 'material-ui';
 
 import './AddEvent.css';
 
@@ -13,40 +13,49 @@ class AddEvent extends Component {
       location: '',
       startDate: null,
       startDateError: null,
+      startDateCut: '',
       endDate: null,
       endDateError: null,
+      endDateCut: '',
       startTime: null,
       startTimeError: null,
+      startTimeCut: '',
       endTime: null,
-      endTimeError: null
+      endTimeError: null,
+      endTimeCut: '',
+      open: false
     };
   }
 
   handleStartDate = (e, date) => {
-    date = date.toString().slice(0, 15);
+    const cutDate = date.toString().slice(0, 15);
     this.setState({
-      startDate: date
+      startDate: date,
+      startDateCut: cutDate
     });
   }
 
   handleStartTime = (e, date) => {
-    date = date.toString().slice(16);
+    const cutDate = date.toString().slice(16);
     this.setState({
+      startTimeCut: cutDate,
       startTime: date
     });
   }
 
   handleEndDate = (e, date) => {
-    date = date.toString().slice(0, 15);
+    const cutDate = date.toString().slice(0, 15);
     this.setState({
-      endDate: date
+      endDate: date,
+      endDateCut: cutDate
     });
   }
 
   handleEndTime = (e, date) => {
-    date = date.toString().slice(16);
+    const cutDate = date.toString().slice(16);
     this.setState({
-      endTime: date
+      endTime: date,
+      endTimeCut: cutDate
     });
   }
 
@@ -65,8 +74,8 @@ class AddEvent extends Component {
         title: this.state.title,
         description: this.state.description,
         location: this.state.location,
-        start: `${this.state.startDate} ${this.state.startTime}`,
-        end: `${this.state.endDate} ${this.state.endTime}`
+        start: `${this.state.startDateCut} ${this.state.startTimeCut}`,
+        end: `${this.state.endDateCut} ${this.state.endTimeCut}`
       };
       const apiRoute = this.props.api;
       let url = apiRoute + '/api/add/event';
@@ -82,9 +91,32 @@ class AddEvent extends Component {
         .then(res => res)
         .then(data => {
           this.props.addEventToState(eventFormData);
+          this.resetStateWithSnackbar();
         });
     }
-  }
+  };
+
+  resetStateWithSnackbar = () => {
+    this.setState({
+      title: '',
+      titleError: '',
+      description: '',
+      location: '',
+      startDate: null,
+      startDateError: null,
+      startDateCut: '',
+      endDate: null,
+      endDateError: null,
+      endDateCut: '',
+      startTime: null,
+      startTimeError: null,
+      startTimeCut: '',
+      endTime: null,
+      endTimeError: null,
+      endTimeCut: '',
+      open: true
+    });
+  };
 
   errorCheck() {
     let errorObj = {};
@@ -109,7 +141,12 @@ class AddEvent extends Component {
     }
   }
 
-  
+  handleSnackbarClose = () => {
+    this.setState({
+      open: false
+    });
+  };
+
 
   render() {
     return (
@@ -132,7 +169,7 @@ class AddEvent extends Component {
             value={this.state.description}
             onChange={(e) => this.handleInput(e, 'description')}
             fullWidth={true} />
-            <TextField
+          <TextField
             hintText="Location"
             floatingLabelText="Location"
             multiLine={true}
@@ -146,11 +183,13 @@ class AddEvent extends Component {
             mode="landscape"
             errorText={this.state.startDateError}
             errorStyle={{float: "left"}}
+            value={this.state.startDate}
             style={{display: 'inline-block'}}
             onChange={this.handleStartDate} />
           <strong>Start Time:</strong> <TimePicker
             format="ampm"
             hintText="Start Time"
+            value={this.state.startTime}
             errorText={this.state.startTimeError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
@@ -159,6 +198,7 @@ class AddEvent extends Component {
           <strong>End Date:</strong> <DatePicker 
             hintText="End Date"
             mode="landscape"
+            value={this.state.endDate}
             errorText={this.state.endDateError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
@@ -166,6 +206,7 @@ class AddEvent extends Component {
           <strong>End Time:</strong> <TimePicker
             format="ampm"
             hintText="End Time"
+            value={this.state.endTime}
             errorText={this.state.endTimeError}
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
@@ -177,6 +218,12 @@ class AddEvent extends Component {
             onClick={this.addEvent} />
           </div>
         </form>
+        <Snackbar
+          open={this.state.open}
+          message="Event has been added to the calendar!"
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </div>
     );
   }
