@@ -38,7 +38,7 @@ class Login extends Component {
         } else if (res.status === 403) {
           this.pendingUser();
         } else {
-          res.json();
+          return res.json();
         }})
       .then(data => {
         if (data) {
