@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.rbc-date-cell.rbc-now {
+  background-color: #a4a4a4;
+}
+
 .space {
   padding-top: 10vh;
 }
