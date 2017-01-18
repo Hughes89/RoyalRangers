@@ -25,7 +25,7 @@ class Events extends Component {
 
   getEventsData() {
     const apiRoute = this.props.route.api;
-    let url = apiRoute + '/api/events';
+    const url = apiRoute + '/api/events';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -42,18 +42,18 @@ class Events extends Component {
           body: this.state.body.concat(data)
         });
       });
-  }
+  };
 
   handleClose = () => {
     this.setState({open: false});
-  }
+  };
 
   handleToggle = (event) => {
     this.setState({
       open: !this.state.open,
       event: event
     });
-  }
+  };
 
   render() {
     const action = [
@@ -63,7 +63,6 @@ class Events extends Component {
         onTouchTap={this.handleClose}
       />
     ];
-
     return (
       <div className="Events">
         <BigCalendar
@@ -81,7 +80,7 @@ class Events extends Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
-          >
+        >
           <Event event={this.state.event} />
         </Dialog>
       </div>

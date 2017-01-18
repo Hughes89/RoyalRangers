@@ -15,10 +15,14 @@ class Login extends Component {
     };
   }
 
-  signin(e) {
+  signin = (e) => {
     e.preventDefault();
+    if (this.state.email.length === 0) {
+      this.setState({emailError: 'Please enter an e-mail address.'});
+      return;
+    }
     const apiRoute = this.props.route.api;
-    let url = apiRoute + '/api/signin';
+    const url = apiRoute + '/api/signin';
     fetch(url, {
       method: 'POST',
       headers: {
@@ -53,7 +57,7 @@ class Login extends Component {
       passwordError: 'Incorrect Password',
       emailError: '',
       pendError: '',
-    })
+    });
   }
 
   unknownEmail() {
@@ -61,7 +65,7 @@ class Login extends Component {
       emailError: 'Incorrect E-mail',
       passwordError: '',
       pendError: ''
-    })
+    });
   }
 
   pendingUser() {
@@ -72,10 +76,11 @@ class Login extends Component {
     });
   }
 
-  handleInput(e, state) {
+  handleInput = (e) => {
     let value = e.target.value;
+    let name = e.target.name;
     this.setState({
-      [state]: value
+      [name]: value
     });
   }
 
@@ -87,20 +92,26 @@ class Login extends Component {
               hintText="E-mail"
               floatingLabelText="E-mail"
               value={this.state.email}
-              onChange={(e) => this.handleInput(e, 'email')}
+              name="email"
+              autoComplete="off"
+              onChange={this.handleInput}
               errorStyle={{float: "left"}}
               errorText={this.state.emailError}
-              /><br />
+            />
+            <br />
             <TextField
               hintText="Password"
               floatingLabelText="Password"
               type="password"
               value={this.state.password}
-              onChange={(e) => this.handleInput(e, 'password')}
+              name="password"
+              autoComplete="off"
+              onChange={this.handleInput}
               errorStyle={{float: "left"}}
               errorText={this.state.passwordError}
-            /><br />
-            <FlatButton type="submit" label="Sign in" onClick={(e) => this.signin(e)} />
+            />
+            <br />
+            <FlatButton type="submit" label="Sign in" onClick={this.signin} />
             <div style={{color: 'red'}} >{this.state.pendError}</div>
           </form>
         </div>

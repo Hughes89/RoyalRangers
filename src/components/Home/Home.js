@@ -17,7 +17,7 @@ class Home extends Component {
 
   getHomeData() {
     const apiRoute = this.props.route.api;
-    let url = apiRoute + '/api/home';
+    const url = apiRoute + '/api/home';
     fetch(url, {method: 'GET'})
       .then(res => res.json())
       .then(data => {
@@ -32,9 +32,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <div className="main-image" style={{backgroundImage: `url(${this.state.banner})`}}></div>
-        <div className="body">
-          <p>{this.state.body}</p>
-        </div>
+        <div className="body" dangerouslySetInnerHTML={{__html: this.state.body}} />
       </div>
     );
   }
