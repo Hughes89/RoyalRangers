@@ -31,7 +31,7 @@ class PendingUser extends React.Component {
     const accept = confirm('Are you sure you want to delete this user?');
     if (accept) {
       const apiRoute = this.props.api;
-      let url = apiRoute + '/api/remove/user';
+      const url = apiRoute + '/api/remove/user';
       fetch(url, {
         method: 'DELETE',
         headers: {
@@ -55,14 +55,18 @@ class PendingUser extends React.Component {
       <div className="Pending-User" id={i}>
       <div className="User-Container">
       <Card>
-        <CardText>
+        <CardText style={{padding: '20px'}} >
           <p>
-            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}<br />
-            <strong>E-mail:</strong> {user.email} <br />
+            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}
+            <br />
+            <strong>E-mail:</strong> {user.email} 
+            <br />
             <strong>Privelage:</strong> {user.privelage}
           </p>
-          <RaisedButton style={{paddingRight: 5}} label="Activate User" onClick={this.addPendingUser}/> 
-          <RaisedButton label="Decline User" onClick={this.removeUser} />
+          <div className="center-button">
+            <RaisedButton style={{paddingRight: 5}} label="Activate User" onClick={this.addPendingUser} primary={true}/> 
+            <RaisedButton label="Decline User" onClick={this.removeUser} primary={true} />
+          </div>
         </CardText>
       </Card>
       </div>
