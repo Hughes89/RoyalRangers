@@ -12,11 +12,12 @@ class EditEvent extends React.Component {
     };
   }
 
-  removeEvent(id) {
+  removeEvent = () => {
     const accept = confirm('Are you sure you want to delete this event?');
     if (accept) {
+      const id = this.props.event._id;
       const apiRoute = this.props.api;
-      let url = apiRoute + '/api/remove/event';
+      const url = apiRoute + '/api/remove/event';
       fetch(url, {
         method: 'DELETE',
         headers: {
@@ -57,8 +58,8 @@ class EditEvent extends React.Component {
               <p>{event.description}</p>
               <p><strong>Start Date & Time:</strong> <Moment format="MMMM Do YYYY, h:mm a." date={event.start} /></p>
               <p><strong>End Date & Time</strong>: <Moment format="MMMM Do YYYY, h:mm a." date={event.end} /></p>
-              <RaisedButton label="Edit" onClick={this.handleDialog} />{' '}
-              <RaisedButton label="Remove" onClick={() => this.removeEvent(event._id)} />
+              <RaisedButton label="Edit" style={{paddingRight: '5px'}} onClick={this.handleDialog} />
+              <RaisedButton label="Remove" onClick={this.removeEvent} />
             </CardText>
           </Card>
         </div>
@@ -69,8 +70,13 @@ class EditEvent extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleDialog}
           autoScrollBodyContent={true}
-          >
-          <EditEventDialog event={event} updateEventState={updateEventState} handleDialog={this.handleDialog} api={api}/>
+        >
+          <EditEventDialog 
+            event={event} 
+            updateEventState={updateEventState} 
+            handleDialog={this.handleDialog} 
+            api={api}
+          />
         </Dialog>
       </div>
     );
