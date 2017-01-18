@@ -20,7 +20,7 @@ class AddUser extends Component {
     };
   }
 
-  addUser(e) {
+  addUser = (e) => {
     e.preventDefault();
     let errors = this.errorCheck();
     if (!errors) {
@@ -33,7 +33,7 @@ class AddUser extends Component {
         pending: false 
       }
       const apiRoute = this.props.api;
-      let url = apiRoute + '/api/signup';
+      const url = apiRoute + '/api/signup';
       fetch(url, {
         method: 'POST',
         headers: {
@@ -68,36 +68,35 @@ class AddUser extends Component {
 
   errorCheck() {
     let errorObj = {};
-    !validateEmail(this.state.email) ? errorObj.email = true : errorObj.email = false;
-    this.state.password.length < 8 ? errorObj.password = true : errorObj.password = false;
-    this.state.firstName.length === 0 ? errorObj.firstName = true : errorObj.firstName = false;
-    this.state.lastName.length === 0 ? errorObj.lastName = true : errorObj.lastName = false;
-    errorHandling.call(this, errorObj);
-    for (let key in errorObj) {
-      if (errorObj[key] === true) {
-        return true;
-      }
-    }
-
-    function validateEmail(email) {
+    const validateEmail = (email) => {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
-
-    function errorHandling (obj) {
+    const errorHandling = (obj) => {
       obj.email ? this.setState({emailError: 'Please enter a valid e-mail.'}) : this.setState({emailError: ''});
       obj.password ? this.setState({passwordError: 'Password must be greater then 8 characters.'}) : this.setState({passwordError: ''});
       obj.firstName ? this.setState({firstNameError: 'Must contain more then 1 character.'}) : this.setState({firstNameError: ''});
       obj.lastName ? this.setState({lastNameError: 'Must contain more then 1 character.'}) : this.setState({lastNameError: ''});
     }
+    !validateEmail(this.state.email) ? errorObj.email = true : errorObj.email = false;
+    this.state.password.length < 8 ? errorObj.password = true : errorObj.password = false;
+    this.state.firstName.length === 0 ? errorObj.firstName = true : errorObj.firstName = false;
+    this.state.lastName.length === 0 ? errorObj.lastName = true : errorObj.lastName = false;
+    errorHandling(errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key] === true) {
+        return true;
+      }
+    }
   }
 
-  handleInput(e, state) {
+  handleInput = (e) => {
     let value = e.target.value;
+    let name = e.target.name;
     this.setState({
-      [state]: value
+      [name]: value
     });
-  }
+  };
 
   handleChange = (event, index, value) => {
     this.setState({
@@ -121,7 +120,9 @@ class AddUser extends Component {
             errorStyle={{float: "left"}}
             errorText={this.state.emailError}
             value={this.state.email}
-            onChange={(e) => this.handleInput(e, 'email')}
+            name="email"
+            autoComplete="off"
+            onChange={this.handleInput}
             />
           <TextField
             hintText="Password"
@@ -130,7 +131,9 @@ class AddUser extends Component {
             errorStyle={{float: "left"}}
             errorText={this.state.passwordError}
             value={this.state.password}
-            onChange={(e) => this.handleInput(e, 'password')}
+            name="password"
+            autoComplete="off"
+            onChange={this.handleInput}
           /><br />
           <TextField
             hintText="First Name"
@@ -138,7 +141,9 @@ class AddUser extends Component {
             errorStyle={{float: "left"}}
             value={this.state.firstName}
             errorText={this.state.firstNameError}
-            onChange={(e) => this.handleInput(e, 'firstName')}
+            autoComplete="off"
+            name="firstName"
+            onChange={this.handleInput}
           />
           <TextField
             hintText="Last Name"
@@ -146,7 +151,9 @@ class AddUser extends Component {
             errorStyle={{float: "left"}}
             value={this.state.lastName}
             errorText={this.state.lastNameError}
-            onChange={(e) => this.handleInput(e, 'lastName')}
+            autoComplete="off"
+            name="lastName"
+            onChange={this.handleInput}
           /><br />
           <SelectField
             value={this.state.privelage}
@@ -158,7 +165,7 @@ class AddUser extends Component {
             <MenuItem key={2} value="admin" primaryText="Admin" />
           </SelectField>
           <br />
-          <FlatButton type="submit" label="Create User" onClick={(e) => this.addUser(e)} />
+          <FlatButton type="submit" label="Create User" onClick={this.addUser} />
         </form>
         <Snackbar
           open={this.state.open}
