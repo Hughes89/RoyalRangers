@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, SelectField, MenuItem } from 'material-ui';
+import { FlatButton, TextField, SelectField, MenuItem, Snackbar } from 'material-ui';
 
 import './AddUser.css';
 
@@ -15,7 +15,8 @@ class AddUser extends Component {
       emailError: '',
       passwordError: '',
       firstNameError: '',
-      lastNameError: ''
+      lastNameError: '',
+      open:false
     };
   }
 
@@ -28,7 +29,8 @@ class AddUser extends Component {
         password: this.state.password,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
-        privelage: this.state.privelage 
+        privelage: this.state.privelage,
+        pending: false 
       }
       const apiRoute = this.props.api;
       let url = apiRoute + '/api/signup';
@@ -44,6 +46,18 @@ class AddUser extends Component {
         .then(res => res)
         .then(data => {
           this.props.addUserToState(userFormData);
+          this.setState({
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            privelage: 'user',
+            emailError: '',
+            passwordError: '',
+            firstNameError: '',
+            lastNameError: '',
+            open: true
+          });
         });
     }
   }
@@ -81,7 +95,17 @@ class AddUser extends Component {
     });
   }
 
-  handleChange = (event, index, value) => this.setState({privelage: value});
+  handleChange = (event, index, value) => {
+    this.setState({
+      privelage: value
+    });
+  };
+
+  handleSnackbarClose = () => {
+    this.setState({
+      open: false
+    });
+  };
 
   render() {
     return (
@@ -132,6 +156,12 @@ class AddUser extends Component {
           <br />
           <FlatButton type="submit" label="Create User" onClick={(e) => this.addUser(e)} />
         </form>
+        <Snackbar
+          open={this.state.open}
+          message="User has been added!"
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </div>
     );
   }

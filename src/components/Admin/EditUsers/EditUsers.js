@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import EditUser  from '../EditUser/EditUser';
 import AddUser from '../AddUser/AddUser';
+import PendingUser from '../PendingUser/PendingUser';
+import { Tab, Tabs } from 'material-ui';
+import SwipeableViews from 'react-swipeable-views';
 
 import './EditUsers.css';
 
@@ -9,7 +12,8 @@ class editUsers extends Component {
     super(props);
     this.state = {
       body: [],
-      manage: true,
+      pending: [],
+      slideIndex: 1,
     };
   }
 
@@ -28,17 +32,18 @@ class editUsers extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        this.setState({
-          body: data
+        data.forEach(user => {
+          user.pending ? this.setState({ pending: this.state.pending.concat(user) }) : this.setState({ body: this.state.body.concat(user) });
         });
       });
   }
 
-  addUserToState = (user) => {
+  addUserToState = (user, activate) => {
+    if (activate) {
+      this.removeUserFromPending(user);
+    }
     this.setState({
       body: this.state.body.concat(user),
-      manage: !this.state.manage
     });
   }
 
@@ -48,41 +53,62 @@ class editUsers extends Component {
     });
   };
 
-  manageUsers() {
-    if (this.state.manage) {
-      return this.state.body.map((user, i) => {
-        return (
-          <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
-      )})
-    } else {
-      return (
-        <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
-        )
-    }
-  }
-
-  viewClick = () => {
+  removeUserFromPending = (user) => {
     this.setState({
-      manage: !this.state.manage
-    })
-  }
+      pending: this.state.pending.filter(ele => ele._id !== user._id),
+    });
+  };
 
-  handleView() {
-    if (this.state.manage) {
-      return ( <p className="user-manage"><span className="user-link" onClick={this.viewClick}>Add User </span> || <strong>Manage Users</strong></p>)
-    } else {
-      return ( <p className="user-manage"><strong>Add User</strong> || <span className="user-link" onClick={this.viewClick}>Manage Users</span></p>)
-    }
-  }
+  manageUsers = (value) => {
+    this.setState({
+      slideIndex: value
+    });
+  };
+
 
   render() {
     return (
       <div className="Edit-Users">
-        {this.handleView()}
-        {this.manageUsers()}
+        <Tabs 
+          onChange={this.manageUsers}
+          value={this.state.slideIndex} >
+          <Tab label="Add Users" value={0}>
+            <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
+          </Tab>
+          <Tab label="Manage Users" value={1}>
+            {this.state.body.map((user, i) => 
+              <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
+            )}
+          </Tab>
+          <Tab label={`Pending Users (${this.state.pending.length})`} value ={2}>
+            {this.state.pending.map((user, i) =>
+              <PendingUser api={this.props.route.api} user={user} key={i} addUserToState={this.addUserToState} removeUserFromPending={this.removeUserFromPending} />
+            )}
+          </Tab>
+        </Tabs>
+        
       </div>
     );
   }
 }
 
 export default editUsers;
+
+
+// <SwipeableViews
+//           index={this.state.slideIndex}
+//           onChange={this.manageUsers} >
+//           <div>
+//             <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
+//           </div>
+//           <div>
+//             {this.state.body.map((user, i) => 
+//                 <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
+//             )}
+//           </div>
+//           <div>
+//             {this.state.pending.map((user, i) =>
+//               <PendingUser api={this.props.route.api} user={user} key={i} addUserToState={this.addUserToState} removeUserFromPending={this.removeUserFromPending} />
+//             )}
+//           </div>
+//         </SwipeableViews>
