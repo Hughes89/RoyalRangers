@@ -21,7 +21,7 @@ module.exports = {
               lastName: req.body.lastName,
               salt: data.salt,
               privelage: req.body.privelage || 'user',
-              pending: req.body.pending || true
+              pending: req.body.pending || false
             })
               .then((user) => {
                 res.sendStatus(201);
