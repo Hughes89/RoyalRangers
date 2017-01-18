@@ -28,9 +28,7 @@ class EditEvent extends React.Component {
         })
       })
         .then(res => res)
-        .then(data => {
-          this.props.removeEventFromState(id);
-        });
+        .then(data => this.props.removeEventFromState(id));
     }
   }
 

@@ -33,7 +33,7 @@ class AddEvent extends Component {
       startDate: date,
       startDateCut: cutDate
     });
-  }
+  };
 
   handleStartTime = (e, date) => {
     const cutDate = date.toString().slice(16);
@@ -41,7 +41,7 @@ class AddEvent extends Component {
       startTimeCut: cutDate,
       startTime: date
     });
-  }
+  };
 
   handleEndDate = (e, date) => {
     const cutDate = date.toString().slice(0, 15);
@@ -49,7 +49,7 @@ class AddEvent extends Component {
       endDate: date,
       endDateCut: cutDate
     });
-  }
+  };
 
   handleEndTime = (e, date) => {
     const cutDate = date.toString().slice(16);
@@ -57,14 +57,15 @@ class AddEvent extends Component {
       endTime: date,
       endTimeCut: cutDate
     });
-  }
+  };
 
-  handleInput = (e, state) => {
+  handleInput = (e) => {
     let value = e.target.value;
+    let name = e.target.name
     this.setState({
-      [state]: value
+      [name]: value
     });
-  }
+  };
 
   addEvent = (e) => {
     e.preventDefault();
@@ -120,33 +121,31 @@ class AddEvent extends Component {
 
   errorCheck() {
     let errorObj = {};
-    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
-    this.state.startDate === null ? errorObj.startDate = true : errorObj.startDate = false;
-    this.state.endDate === null ? errorObj.endDate = true : errorObj.endDate = false;
-    this.state.startTime === null ? errorObj.startTime = true : errorObj.startTime = false;
-    this.state.endTime === null ? errorObj.endTime = true : errorObj.endTime = false;
-    errorHandling.call(this, errorObj);
-    for (let key in errorObj) {
-      if (errorObj[key] === true) {
-        return true;
-      }
-    }
-
-    function errorHandling (obj) {
+    const errorHandling = (obj) => {
       obj.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
       obj.startDate ? this.setState({startDateError: 'Must contain a start date.'}) : this.setState({startDateError: ''});
       obj.startTime ? this.setState({startTimeError: 'Must contain a start time.'}) : this.setState({startTimeError: ''});
       obj.endDate ? this.setState({endDateError: 'Must contain a end date.'}) : this.setState({endDateError: ''});
       obj.endTime ? this.setState({endTimeError: 'Must contain a end time.'}) : this.setState({endTimeError: ''});
     }
-  }
+    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
+    this.state.startDate === null ? errorObj.startDate = true : errorObj.startDate = false;
+    this.state.endDate === null ? errorObj.endDate = true : errorObj.endDate = false;
+    this.state.startTime === null ? errorObj.startTime = true : errorObj.startTime = false;
+    this.state.endTime === null ? errorObj.endTime = true : errorObj.endTime = false;
+    errorHandling(errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key] === true) {
+        return true;
+      }
+    }
+  };
 
   handleSnackbarClose = () => {
     this.setState({
       open: false
     });
   };
-
 
   render() {
     return (
@@ -158,7 +157,9 @@ class AddEvent extends Component {
             errorText={this.state.titleError}
             errorStyle={{float: "left"}}
             value={this.state.title}
-            onChange={(e) => this.handleInput(e, 'title')}
+            name="title"
+            onChange={this.handleInput}
+            autoComplete="off"
             fullWidth={true} />
           <br />
           <TextField
@@ -167,7 +168,9 @@ class AddEvent extends Component {
             multiLine={true}
             errorStyle={{float: "left"}}
             value={this.state.description}
-            onChange={(e) => this.handleInput(e, 'description')}
+            name="description"
+            autoComplete="off"
+            onChange={this.handleInput}
             fullWidth={true} />
           <TextField
             hintText="Location"
@@ -175,10 +178,13 @@ class AddEvent extends Component {
             multiLine={true}
             errorStyle={{float: "left"}}
             value={this.state.location}
-            onChange={(e) => this.handleInput(e, 'location')}
+            name="location"
+            autoComplete="off"
+            onChange={this.handleInput}
             fullWidth={true} />
           <div className="center">
-          <strong>Start Date:</strong> <DatePicker 
+          <strong>Start Date:</strong> 
+          <DatePicker 
             hintText="Start Date" 
             mode="landscape"
             errorText={this.state.startDateError}
@@ -186,7 +192,8 @@ class AddEvent extends Component {
             value={this.state.startDate}
             style={{display: 'inline-block'}}
             onChange={this.handleStartDate} />
-          <strong>Start Time:</strong> <TimePicker
+          <strong>Start Time:</strong> 
+          <TimePicker
             format="ampm"
             hintText="Start Time"
             value={this.state.startTime}
@@ -195,7 +202,8 @@ class AddEvent extends Component {
             style={{display: 'inline-block'}}
             onChange={this.handleStartTime} />
           <br />
-          <strong>End Date:</strong> <DatePicker 
+          <strong>End Date:</strong>
+          <DatePicker 
             hintText="End Date"
             mode="landscape"
             value={this.state.endDate}
@@ -203,7 +211,8 @@ class AddEvent extends Component {
             errorStyle={{float: "left"}}
             style={{display: 'inline-block'}}
             onChange={this.handleEndDate} />
-          <strong>End Time:</strong> <TimePicker
+          <strong>End Time:</strong> 
+          <TimePicker
             format="ampm"
             hintText="End Time"
             value={this.state.endTime}

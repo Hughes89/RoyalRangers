@@ -17,6 +17,7 @@ module.exports = (app, express) => {
   app.get('/api/privelage', auth.isAuth, user.privelageCheck);
   app.get('/api/users', auth.isAuth, user.getAllUsers);
   app.delete('/api/remove/user', auth.isAuth, user.removeUser);
+  app.put('/api/activate/user', auth.isAuth, user.addPendingUser);
 
   //Managing Events
   app.post('/api/add/event', auth.isAuth, events.addEvent);
