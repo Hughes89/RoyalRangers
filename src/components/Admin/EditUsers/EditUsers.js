@@ -3,7 +3,6 @@ import EditUser  from '../EditUser/EditUser';
 import AddUser from '../AddUser/AddUser';
 import PendingUser from '../PendingUser/PendingUser';
 import { Tab, Tabs } from 'material-ui';
-import SwipeableViews from 'react-swipeable-views';
 
 import './EditUsers.css';
 
@@ -77,12 +76,23 @@ class editUsers extends Component {
           </Tab>
           <Tab label="Manage Users" value={1}>
             {this.state.body.map((user, i) => 
-              <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
+              <EditUser 
+                key={i} 
+                user={user} 
+                removeUserFromState={this.removeUserFromState} 
+                api={this.props.route.api} 
+              />
             )}
           </Tab>
-          <Tab label={`Pending (${this.state.pending.length})`} value ={2}>
+          <Tab label={`Pending (${this.state.pending.length})`} value={2}>
             {this.state.pending.map((user, i) =>
-              <PendingUser api={this.props.route.api} user={user} key={i} addUserToState={this.addUserToState} removeUserFromPending={this.removeUserFromPending} />
+              <PendingUser 
+                api={this.props.route.api}
+                user={user} 
+                key={i} 
+                addUserToState={this.addUserToState} 
+                removeUserFromPending={this.removeUserFromPending} 
+              />
             )}
           </Tab>
         </Tabs>
@@ -93,22 +103,3 @@ class editUsers extends Component {
 }
 
 export default editUsers;
-
-
-// <SwipeableViews
-//           index={this.state.slideIndex}
-//           onChange={this.manageUsers} >
-//           <div>
-//             <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
-//           </div>
-//           <div>
-//             {this.state.body.map((user, i) => 
-//                 <EditUser key={i} user={user} removeUserFromState={this.removeUserFromState} api={this.props.route.api} />
-//             )}
-//           </div>
-//           <div>
-//             {this.state.pending.map((user, i) =>
-//               <PendingUser api={this.props.route.api} user={user} key={i} addUserToState={this.addUserToState} removeUserFromPending={this.removeUserFromPending} />
-//             )}
-//           </div>
-//         </SwipeableViews>
