@@ -46,21 +46,25 @@ class AddUser extends Component {
         .then(res => res)
         .then(data => {
           this.props.addUserToState(userFormData);
-          this.setState({
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            privelage: 'user',
-            emailError: '',
-            passwordError: '',
-            firstNameError: '',
-            lastNameError: '',
-            open: true
-          });
+          this.resetStateWithSnackbar();
         });
     }
   }
+
+  resetStateWithSnackbar = () => {
+    this.setState({
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      privelage: 'user',
+      emailError: '',
+      passwordError: '',
+      firstNameError: '',
+      lastNameError: '',
+      open: true
+    });
+  };
 
   errorCheck() {
     let errorObj = {};
