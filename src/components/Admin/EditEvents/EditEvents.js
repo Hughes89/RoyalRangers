@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import EditEvent from '../EditEvent/EditEvent';
 import AddEvent from '../AddEvent/AddEvent';
+import { Tab, Tabs } from 'material-ui';
+import SwipeableViews from 'react-swipeable-views';
 import './EditEvents.css';
 
 
@@ -9,7 +11,8 @@ class EditEvents extends Component {
     super(props);
     this.state = {
       manage: true,
-      body: []
+      body: [],
+      slideIndex: 1
     };
   }
 
@@ -43,7 +46,7 @@ class EditEvents extends Component {
   addEventToState = (event) => {
     this.setState({
       body: this.state.body.concat(event),
-      manage: !this.state.manage
+      manage: !this.state.manage,
     });
   }
 
@@ -54,41 +57,42 @@ class EditEvents extends Component {
         event.description = updated.description;
       }
     });
-  }
+  };
 
 
-  manageEvents() {
-    if (this.state.manage) {
-      return this.state.body.map((event, i) => {
-        return (
-          <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
-      )})
-    } else {
-      return (
-        <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
-        )
-    }
-  }
-
-  handleView() {
-    if (this.state.manage) {
-      return ( <p className="event-manage"><span className="event-link" onClick={this.viewClick}>Add Event </span> || <strong>Manage Events</strong></p>)
-    } else {
-      return ( <p className="event-manage"><strong>Add Event</strong> || <span className="event-link" onClick={this.viewClick}>Manage Events</span></p>)
-    }
-  }
+  manageEvents = (value) => {
+    this.setState({
+      slideIndex: value
+    });
+  };
 
   viewClick = () => {
     this.setState({
       manage: !this.state.manage
-    })
-  }
+    });
+  };
 
   render() {
     return (
       <div className="Edit-Events">
-        {this.handleView()}
-        {this.manageEvents()}
+        <Tabs 
+          initialSelectedIndex={1}
+          onChange={this.manageEvents}
+          value={this.state.slideIndex} >
+          <Tab label="Add Event" value={0} />
+          <Tab label="Manage Events" value={1} />
+        </Tabs>
+        <SwipeableViews
+          index={this.state.slideIndex}
+          onChange={this.manageEvents}>
+        <div>
+          <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
+        </div>
+        <div>
+          {this.state.body.map((event, i) => <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
+          )}
+        </div>
+        </SwipeableViews>
       </div>
     );
   }
