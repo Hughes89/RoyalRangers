@@ -9,19 +9,24 @@ import Login from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
 import EditHome from './components/Admin/EditHome/EditHome';
 import EditEvents from './components/Admin/EditEvents/EditEvents';
-import EditAbout from './components/Admin/EditAbout/EditAbout';
+//import EditAbout from './components/Admin/EditAbout/EditAbout';
 import EditUsers from './components/Admin/EditUsers/EditUsers';
 import UpPassword from './components/UpPassword/UpPassword';
 import apiRoute from './apiRoute'
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import customTheme from './muiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const api = apiRoute.dev;
 
+const muiTheme = getMuiTheme(customTheme);
+
+
 const router = (
-  <MuiThemeProvider>
+  <MuiThemeProvider muiTheme={muiTheme} >
   <Router history={browserHistory}>
     <Route path="/" component={App} api={api} >
       <IndexRoute component={Home} api={api} />
