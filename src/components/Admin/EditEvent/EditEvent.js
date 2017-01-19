@@ -33,6 +33,13 @@ class EditEvent extends React.Component {
     }
   }
 
+  renderNotes() {
+    console.log(this.props)
+    if (this.props.event.description) {
+      return (<p><strong>Notes: </strong> {this.props.event.description}</p>)
+    }
+  }
+
   handleDialog = (e) => {
     this.setState({
       open: !this.state.open
@@ -53,13 +60,15 @@ class EditEvent extends React.Component {
       <div className="Edit-Event" id={i}>
         <div className="Event-Container">
           <Card>
-            <CardText>
+            <CardText style={{padding: '20px'}} >
               <strong><p>{event.title}</p></strong>
-              <p>{event.description}</p>
+              {this.renderNotes()}
               <p><strong>Start Date & Time:</strong> <Moment format="MMMM Do YYYY, h:mm a." date={event.start} /></p>
               <p><strong>End Date & Time</strong>: <Moment format="MMMM Do YYYY, h:mm a." date={event.end} /></p>
-              <RaisedButton label="Edit" style={{paddingRight: '5px'}} onClick={this.handleDialog} />
-              <RaisedButton label="Remove" onClick={this.removeEvent} />
+              <div className="center-button">
+                <RaisedButton label="Edit" style={{paddingRight: '5px'}} onClick={this.handleDialog} />
+                <RaisedButton label="Remove" onClick={this.removeEvent} />
+              </div>
             </CardText>
           </Card>
         </div>
