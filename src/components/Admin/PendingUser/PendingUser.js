@@ -57,11 +57,11 @@ class PendingUser extends React.Component {
       <Card>
         <CardText style={{padding: '20px'}} >
           <p>
-            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}
+            <strong className="user">Name: </strong>{user.firstName + ' ' + user.lastName}
             <br />
-            <strong>E-mail:</strong> {user.email} 
+            <strong className="user">E-mail:</strong> {user.email} 
             <br />
-            <strong>Privelage:</strong> {user.privelage}
+            <strong className="user">Privelage:</strong> {user.privelage}
           </p>
           <div className="center-button">
             <RaisedButton style={{paddingRight: 5}} label="Activate User" onClick={this.addPendingUser} primary={true}/> 
