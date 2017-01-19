@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField } from 'material-ui';
+import { RaisedButton, TextField } from 'material-ui';
 
 import './EditEvent.css';
 
@@ -103,9 +103,10 @@ class EditEventDialog extends Component {
             fullWidth={true} 
           />
           <div className="center">
-          <FlatButton 
+          <RaisedButton 
             type="submit" 
             label="Update Event" 
+            primary={true}
             onClick={this.editEvent} 
           />
           </div>

@@ -53,7 +53,8 @@ class EditEvent extends React.Component {
       <RaisedButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.handleDialog} />
+        onTouchTap={this.handleDialog} 
+      />
     ];
     return (
       <div className="Edit-Event" id={i}>
