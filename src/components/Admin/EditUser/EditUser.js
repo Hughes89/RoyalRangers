@@ -31,12 +31,12 @@ class EditUser extends React.Component {
       <div className="User-Container">
       <Card>
         <CardText style={{padding: '20px'}} >
-          <p>
-            <strong>Name: </strong>{user.firstName + ' ' + user.lastName}
+          <p className="user-card">
+            <strong className="user">Name: </strong>{user.firstName + ' ' + user.lastName}
             <br />
-            <strong>E-mail:</strong> {user.email}
+            <strong className="user">E-mail:</strong> {user.email}
             <br />
-            <strong>Privelage:</strong> {user.privelage}
+            <strong className="user">Privelage:</strong> {user.privelage}
           </p>
           <div className="center-button">
             <RaisedButton label="Delete User" onClick={this.removeUser} primary={true} />

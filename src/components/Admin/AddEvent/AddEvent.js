@@ -186,7 +186,7 @@ class AddEvent extends Component {
             fullWidth={true} 
           />
           <div className="center">
-          <strong>Start Date:</strong> 
+          <strong>Start Date: </strong> 
           <DatePicker 
             hintText="Start Date" 
             mode="landscape"
@@ -196,7 +196,7 @@ class AddEvent extends Component {
             style={{display: 'inline-block'}}
             onChange={this.handleStartDate} 
           />
-          <strong>Start Time:</strong> 
+          <strong>Start Time: </strong> 
           <TimePicker
             format="ampm"
             hintText="Start Time"
@@ -207,7 +207,7 @@ class AddEvent extends Component {
             onChange={this.handleStartTime} 
           />
           <br />
-          <strong>End Date:</strong>
+          <strong>End Date: </strong>
           <DatePicker 
             hintText="End Date"
             mode="landscape"
@@ -217,7 +217,7 @@ class AddEvent extends Component {
             style={{display: 'inline-block'}}
             onChange={this.handleEndDate} 
           />
-          <strong>End Time:</strong> 
+          <strong>End Time: </strong> 
           <TimePicker
             format="ampm"
             hintText="End Time"

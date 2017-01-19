@@ -74,25 +74,29 @@ class editUsers extends Component {
             <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
           </Tab>
           <Tab label="Manage Users" value={1}>
-            {this.state.body.map((user, i) => 
-              <EditUser 
-                key={i} 
-                user={user} 
-                removeUserFromState={this.removeUserFromState} 
-                api={this.props.route.api} 
-              />
-            )}
+            <div className="center">
+              {this.state.body.map((user, i) => 
+                <EditUser 
+                  key={i} 
+                  user={user} 
+                  removeUserFromState={this.removeUserFromState} 
+                  api={this.props.route.api} 
+                />
+              )}
+            </div>
           </Tab>
           <Tab label={`Pending (${this.state.pending.length})`} value={2}>
-            {this.state.pending.map((user, i) =>
-              <PendingUser 
-                api={this.props.route.api}
-                user={user} 
-                key={i} 
-                addUserToState={this.addUserToState} 
-                removeUserFromPending={this.removeUserFromPending} 
-              />
-            )}
+            <div className="center">
+              {this.state.pending.map((user, i) =>
+                <PendingUser 
+                  api={this.props.route.api}
+                  user={user} 
+                  key={i} 
+                  addUserToState={this.addUserToState} 
+                  removeUserFromPending={this.removeUserFromPending} 
+                />
+              )}
+            </div>
           </Tab>
         </Tabs>
         
