@@ -34,7 +34,6 @@ class EditEvent extends React.Component {
   }
 
   renderNotes() {
-    console.log(this.props)
     if (this.props.event.description) {
       return (<p><strong>Notes: </strong> {this.props.event.description}</p>)
     }
@@ -66,8 +65,8 @@ class EditEvent extends React.Component {
               <p><strong>Start Date & Time:</strong> <Moment format="MMMM Do YYYY, h:mm a." date={event.start} /></p>
               <p><strong>End Date & Time</strong>: <Moment format="MMMM Do YYYY, h:mm a." date={event.end} /></p>
               <div className="center-button">
-                <RaisedButton label="Edit" style={{paddingRight: '5px'}} onClick={this.handleDialog} />
-                <RaisedButton label="Remove" onClick={this.removeEvent} />
+                <RaisedButton label="Edit" primary={true} style={{paddingRight: '5px'}} onClick={this.handleDialog} />
+                <RaisedButton label="Remove" primary={true} onClick={this.removeEvent} />
               </div>
             </CardText>
           </Card>
