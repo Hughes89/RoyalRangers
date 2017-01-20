@@ -18,6 +18,6 @@ app.use(function(req, res, next) {
 require('./config/routes')(app, express);
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.database ,() => {
+mongoose.connect(process.env.database, () => {
   app.listen(port, () => console.log(`Listening on port: ${port}`));
 });
