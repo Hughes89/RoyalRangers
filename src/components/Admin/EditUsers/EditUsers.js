@@ -65,15 +65,19 @@ class editUsers extends Component {
   };
 
   render() {
+    const tabStyles = {
+      backgroundColor: '#FFEB3B',
+      color: '#616161'
+    };
     return (
       <div className="Edit-Users">
         <Tabs 
           onChange={this.manageUsers}
           value={this.state.slideIndex} >
-          <Tab label="Add Users" value={0}>
+          <Tab style={tabStyles} label="Add Users" value={0}>
             <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
           </Tab>
-          <Tab label="Manage Users" value={1}>
+          <Tab style={tabStyles} label="Manage Users" value={1}>
             <div className="center">
               {this.state.body.map((user, i) => 
                 <EditUser 
@@ -85,7 +89,7 @@ class editUsers extends Component {
               )}
             </div>
           </Tab>
-          <Tab label={`Pending (${this.state.pending.length})`} value={2}>
+          <Tab style={tabStyles} label={`Pending (${this.state.pending.length})`} value={2}>
             <div className="center">
               {this.state.pending.map((user, i) =>
                 <PendingUser 
@@ -99,7 +103,6 @@ class editUsers extends Component {
             </div>
           </Tab>
         </Tabs>
-        
       </div>
     );
   }

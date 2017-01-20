@@ -97,13 +97,17 @@ class Navbar extends Component {
   }
 
   menuCheck() {
+    const styles = {
+        backgroundColor: '#3F51B5',
+        fontWeight: 400,
+    }
     if (this.state.user) {
       return (
         <span>
           <Tabs initialSelectedIndex={this.activeTab()}>
-            <Tab onClick={() => this.gotoLink('/')} label="Home"></Tab>
-            <Tab onClick={() => this.gotoLink('/events')} label="Events"></Tab>
-            <Tab onClick={() => this.gotoLink('/about')} label="Pictures"></Tab>
+            <Tab style={styles} onClick={() => this.gotoLink('/')} label="Home"></Tab>
+            <Tab style={styles} onClick={() => this.gotoLink('/events')} label="Events"></Tab>
+            <Tab style={styles} onClick={() => this.gotoLink('/pictures')} label="Pictures"></Tab>
           </Tabs>
         </span>
       )

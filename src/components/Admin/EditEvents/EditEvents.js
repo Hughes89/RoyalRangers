@@ -20,7 +20,7 @@ class EditEvents extends Component {
 
   getEventsData() {
     const apiRoute = this.props.route.api;
-    let url = apiRoute + '/api/events';
+    const url = apiRoute + '/api/events';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -64,16 +64,20 @@ class EditEvents extends Component {
   };
 
   render() {
+    const tabStyles = {
+      backgroundColor: '#FFEB3B',
+      color: '#616161'
+    };
     return (
       <div className="Edit-Events">
         <Tabs 
           initialSelectedIndex={1}
           onChange={this.manageEvents}
           value={this.state.slideIndex} >
-          <Tab label="Add Event" value={0}>
+          <Tab style={tabStyles} label="Add Event" value={0}>
             <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
           </Tab>
-          <Tab label="Manage Events" value={1}>
+          <Tab style={tabStyles} label="Manage Events" value={1}>
             {this.state.body.map((event, i) => 
               <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
             )}
