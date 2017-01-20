@@ -84,10 +84,11 @@ class AddUser extends Component {
     this.state.lastName.length === 0 ? errorObj.lastName = true : errorObj.lastName = false;
     errorHandling(errorObj);
     for (let key in errorObj) {
-      if (errorObj[key] === true) {
+      if (errorObj[key]) {
         return true;
       }
     }
+    return false;
   }
 
   handleInput = (e) => {
