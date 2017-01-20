@@ -14,21 +14,14 @@ class EditAlbumDialog extends Component {
     };
   }
 
-  handleInput = (e) => {
-    let value = e.target.value;
-    let name = e.target.name;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  editEvent = (e) => {
+  editAlbum = (e) => {
     e.preventDefault();
-    const error = this.errorCheck();
-    if (!error) {
+    // const error = this.errorCheck();
+    // if (!error) {
       let albumFormData = {
         title: this.state.title,
-        code: this.state.code
+        code: this.state.code,
+        id: this.props.album._id
       };
       const apiRoute = this.props.api;
       const url = apiRoute + '/api/pictures';
@@ -43,14 +36,22 @@ class EditAlbumDialog extends Component {
       })
         .then(res => res)
         .then(data => {
-          //this.props.updateAlbumState(albumFormData);
+          this.props.updateAlbumState(albumFormData);
           this.props.handleDialog();
         });
-    }
+    //}
   }
 
   errorCheck() {
   }
+
+  handleInput = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
 
   
   render() {
@@ -83,9 +84,9 @@ class EditAlbumDialog extends Component {
           <div className="center">
           <RaisedButton 
             type="submit" 
-            label="Update Event" 
+            label="Update Album" 
             primary={true}
-            onClick={this.editEvent} 
+            onClick={this.editAlbum} 
           />
           </div>
         </form>

@@ -73,7 +73,7 @@ class EditAlbum extends React.Component {
         >
           <EditAlbumDialog 
             album={album} 
-            updateEventState={updateAlbumState} 
+            updateAlbumState={updateAlbumState} 
             handleDialog={this.handleDialog} 
             api={api}
           />
