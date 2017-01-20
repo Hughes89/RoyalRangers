@@ -16,8 +16,8 @@ class EditAlbumDialog extends Component {
 
   editAlbum = (e) => {
     e.preventDefault();
-    // const error = this.errorCheck();
-    // if (!error) {
+    const error = this.errorCheck();
+    if (!error) {
       let albumFormData = {
         title: this.state.title,
         code: this.state.code,
@@ -39,10 +39,24 @@ class EditAlbumDialog extends Component {
           this.props.updateAlbumState(albumFormData);
           this.props.handleDialog();
         });
-    //}
+    }
   }
 
   errorCheck() {
+    let errorObj = {};
+    const errorInputs = (error) => {
+      error.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
+      error.code ? this.setState({codeError: 'Please enter your code here.'}) : this.setState({codeError: ''});
+    };
+    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
+    this.state.code.length < 1 ? errorObj.code = true : errorObj.code = false;
+    errorInputs(errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   handleInput = (e) => {
@@ -76,6 +90,7 @@ class EditAlbumDialog extends Component {
             multiLine={true}
             value={this.state.code}
             errorStyle={{float: "left"}}
+            errorText={this.state.codeError}
             name="code"
             autoComplete="off"
             onChange={this.handleInput}

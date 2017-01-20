@@ -17,8 +17,8 @@ class AddAlbum extends Component {
 
   addAlbum = (e) => {
     e.preventDefault();
-    // let errors = this.errorCheck();
-    // if (!errors) {
+    let errors = this.errorCheck();
+    if (!errors) {
       let albumFormData = {
         title: this.state.title,
         code: this.state.code
@@ -39,7 +39,7 @@ class AddAlbum extends Component {
           this.props.addAlbumToState(albumFormData);
           this.resetStateWithSnackbar();
         });
-    //}
+    }
   }
 
   resetStateWithSnackbar = () => {
@@ -54,12 +54,19 @@ class AddAlbum extends Component {
 
   errorCheck() {
     let errorObj = {};
-    const errorHandling = (obj) => {
-      obj.email ? this.setState({emailError: 'Please enter a valid e-mail.'}) : this.setState({emailError: ''});
-      obj.password ? this.setState({passwordError: 'Password must be greater then 8 characters.'}) : this.setState({passwordError: ''});
-      obj.firstName ? this.setState({firstNameError: 'Must contain more then 1 character.'}) : this.setState({firstNameError: ''});
-      obj.lastName ? this.setState({lastNameError: 'Must contain more then 1 character.'}) : this.setState({lastNameError: ''});
+    const errorInputs = (error) => {
+      error.title ? this.setState({titleError: 'Please enter a title.'}) : this.setState({titleError: ''});
+      error.code ? this.setState({codeError: 'Please enter your code here.'}) : this.setState({codeError: ''});
     };
+    this.state.title.length < 1 ? errorObj.title = true : errorObj.title = false;
+    this.state.code.length < 1 ? errorObj.code = true : errorObj.code = false;
+    errorInputs(errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   handleInput = (e) => {
@@ -104,6 +111,7 @@ class AddAlbum extends Component {
             errorStyle={{float: "left"}}
             errorText={this.state.codeError}
             value={this.state.code}
+            fullWidth={true}
             name="code"
             multiLine={true}
             autoComplete="off"
