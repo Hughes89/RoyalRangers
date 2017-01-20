@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const HomeSchema = new mongoose.Schema({
-  content: String
+  content: String,
+  banner: String
 });
 
 module.exports = mongoose.model('Home', HomeSchema);
