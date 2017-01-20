@@ -127,6 +127,7 @@ class Navbar extends Component {
           <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home Page</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Manage Events</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/users')}>Manage Users</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/pictures')}>Manage Pictures</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/pass')}>Update Password</MenuItem>
         </Drawer>
         <AppBar
