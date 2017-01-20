@@ -3,13 +3,13 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './components/App/App.js';
 import Home from './components/Home/Home';
-import About from './components/About/About';
+import Pictures from './components/Pictures/Pictures';
 import Events from './components/Events/Events';
 import Login from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
 import EditHome from './components/Admin/EditHome/EditHome';
 import EditEvents from './components/Admin/EditEvents/EditEvents';
-//import EditAbout from './components/Admin/EditAbout/EditAbout';
+import EditPictures from './components/Admin/EditPictures/EditPictures';
 import EditUsers from './components/Admin/EditUsers/EditUsers';
 import UpPassword from './components/UpPassword/UpPassword';
 import apiRoute from './apiRoute'
@@ -32,8 +32,9 @@ const router = (
       <IndexRoute component={Home} api={api} />
       <Route path="/events" component={Events} onEnter={authenticateUser} api={api} />
       <Route path="/login" component={Login} api={api} />
-      <Route path='/about' component={About} onEnter={authenticateUser} api={api} />
+      <Route path='/pictures' component={Pictures} onEnter={authenticateUser} api={api} />
       <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} api={api} />
+      <Route path='/update/pictures' component={EditPictures} onEnter={authenticateAdmin} api={api} />
       <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} api={api} />
       <Route path='/update/users' component={EditUsers} onEnter={authenticateAdmin} api={api} />
       <Route path='/update/pass' component={UpPassword} api={api} />
