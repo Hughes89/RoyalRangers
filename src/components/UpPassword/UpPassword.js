@@ -56,10 +56,6 @@ class UpPassword extends Component {
           browserHistory.push('/');
         }
       });
-      // .then(data => {
-      // console.log(data);
-      //   //browserHistory.push('/');
-      // });
   }
 
   handleInput(e, state) {
