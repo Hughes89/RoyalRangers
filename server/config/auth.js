@@ -17,6 +17,14 @@ module.exports = {
     } catch (error) {
       return sendStatus(401);
     }
+  },
+
+  isAdmin: (req, res, next) => {
+    if (req.user.privelage === 'admin') {
+      next();
+    } else {
+      res.sendStatus(401);
+    }
   }
 
 };
