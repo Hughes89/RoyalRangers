@@ -5,51 +5,11 @@ require('dotenv').config();
 const secret = process.env.secret;
 
 module.exports = {
-  signup: (req, res, next) => {
-    const email = req.body.email.toLowerCase();
-    const password = helper.hashPassword(req.body.password)
-      .then(data => {
-        User.findOne({ email: email })
-          .then((user) => {
-            if (user) {
-              return res.sendStatus(400);
-            }
-            User.create({
-              email: email,
-              password: data.password,
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              salt: data.salt,
-              privelage: req.body.privelage || 'user',
-              pending: req.body.pending || false
-            })
-              .then((user) => {
-                res.sendStatus(201);
-              });
-          });
-      });
-  },
-
-  signin: (req, res, next) => {
-    const email = req.body.email.toLowerCase();
-    User.findOne({ email: email })
+  addPendingUser: (req, res, next) => {
+    const id = req.body.id;
+    User.findOneAndUpdate({ _id: id }, { pending: false }, { new:true })
       .then((user) => {
-        if (!user) {
-          return res.sendStatus(404);
-        }
-        if (user.pending) {
-          return res.sendStatus(403);
-        }
-        helper.comparePasswords(req.body.password, user.password)
-          .then(function (foundUser) {
-            if (!foundUser) {
-              return res.sendStatus(401);
-            }
-            user.password = '';
-            user.salt = '';
-            const token = jwt.encode(user, process.env.secret);
-            res.json({ token: token });
-          });
+        res.sendStatus(200);
       });
   },
 
@@ -73,10 +33,6 @@ module.exports = {
       });
   },
 
-  privelageCheck: (req, res, next) => {
-    res.json({privelage: req.user.privelage});
-  },
-
   getAllUsers: (req, res, next) => {
     User.find({})
       .then((users) => {
@@ -88,10 +44,11 @@ module.exports = {
       });
   },
 
+  privelageCheck: (req, res, next) => {
+    res.json({privelage: req.user.privelage});
+  },
+
   removeUser: (req, res, next) => {
-    if (req.user.privelage === 'user') {
-      return res.sendStatus(401);
-    }
     const id = req.body.id;
     User.findById(id)
       .remove()
@@ -105,11 +62,51 @@ module.exports = {
       });
   },
 
-  addPendingUser: (req, res, next) => {
-    const id = req.body.id;
-    User.findOneAndUpdate({ _id: id }, { pending: false }, { new:true })
+  signin: (req, res, next) => {
+    const email = req.body.email.toLowerCase();
+    User.findOne({ email: email })
       .then((user) => {
-        res.sendStatus(200);
+        if (!user) {
+          return res.sendStatus(404);
+        }
+        if (user.pending) {
+          return res.sendStatus(403);
+        }
+        helper.comparePasswords(req.body.password, user.password)
+          .then(function (foundUser) {
+            if (!foundUser) {
+              return res.sendStatus(401);
+            }
+            user.password = undefined;
+            user.salt = undefined;
+            const token = jwt.encode(user, process.env.secret);
+            res.json({ token: token });
+          });
+      });
+  },
+
+  signup: (req, res, next) => {
+    const email = req.body.email.toLowerCase();
+    const password = helper.hashPassword(req.body.password)
+      .then(data => {
+        User.findOne({ email: email })
+          .then((user) => {
+            if (user) {
+              return res.sendStatus(400);
+            }
+            User.create({
+              email: email,
+              password: data.password,
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              salt: data.salt,
+              privelage: req.body.privelage || 'user',
+              pending: req.body.pending || false
+            })
+              .then((user) => {
+                res.sendStatus(201);
+              });
+          });
       });
   }
 };

@@ -2,9 +2,6 @@ const Events = require('./eventsModel');
 
 module.exports = {
   addEvent: (req, res, next) => {
-    if (req.user.privelage === 'user') {
-      return res.sendStatus(401);
-    }
     Events.create({
       title: req.body.title,
       description: req.body.description,
@@ -19,9 +16,6 @@ module.exports = {
   },
 
   deleteEvent: (req, res, next) => {
-    if (req.user.privelage === 'user') {
-      return res.sendStatus(401);
-    }
     const id = req.body.id;
     Events.findById(id)
       .remove()
@@ -36,7 +30,6 @@ module.exports = {
   },
 
   editEvent: (req, res, next) => {
-    console.log(req.body);
     const id = req.body.id;
     Events.update({ _id: id}, 
       {title: req.body.title,
@@ -53,7 +46,7 @@ module.exports = {
       .catch(err => {
         console.log(err);
         res.sendStatus(404);
-      })
+      });
   }
   
 };
