@@ -1,3 +1,9 @@
 .Edit-Album-Add {
   text-align: center;
 }
+
+.flickr-link {
+  padding: 1em;
+  text-align: center;
+  letter-spacing: 1px;
+}

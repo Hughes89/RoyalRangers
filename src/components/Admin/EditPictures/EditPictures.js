@@ -57,9 +57,19 @@ class EditPictures extends Component {
   };
 
   managePictures = (value) => {
-    this.setState({
-      slideIndex: value
-    });
+    if (value === 2) {
+      window.open(
+        'https://www.flickr.com/signin',
+        '_blank'
+      );
+      this.setState({
+        slideIndex: this.state.slideIndex
+      }); 
+    } else {
+      this.setState({
+        slideIndex: value
+      });
+    }
   };
 
   render() {
@@ -88,6 +98,8 @@ class EditPictures extends Component {
                 )
               )}
             </div>
+          </Tab>
+          <Tab style={tabStyles} label="Manage Flickr" value={2}>
           </Tab>
         </Tabs>
       </div>
