@@ -29,7 +29,7 @@ module.exports = {
 
   editAlbum: (req, res, next) => {
     const id = req.body.id;
-    Pictures.update({id: id}, {title: req.body.title, code: req.body.code}, {new: true})
+    Pictures.update({_id: id}, {title: req.body.title, code: req.body.code}, {new: true})
       .then(picture => res.sendStatus(200))
       .catch(err => {
         if (err) console.log(err);
