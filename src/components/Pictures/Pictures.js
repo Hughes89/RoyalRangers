@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Picture from '../Picture/Picture.js';
 
 import './Pictures.css';
 
@@ -10,11 +11,33 @@ class Pictures extends Component {
     };
   }
 
+  componentWillMount() {
+    this.getAlbums();
+  }
+
+  getAlbums() {
+    const apiRoute = this.props.route.api;
+    const url = apiRoute + '/api/pictures';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('RR')
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          body: this.state.body.concat(data)
+        });
+      });  
+  }
+
   render() {
     return (
       <div className="Pictures">
-        Test Album:<br />
-<a data-flickr-embed="true"  href="https://www.flickr.com/gp/147589952@N05/m3XTy0" title="Test"><img src="https://c1.staticflickr.com/1/360/32256412512_ce08e287d5_m.jpg" width="240" height="220" alt="Test" /></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+        {this.state.body.map((album, i) => {
+          return <Picture album={album} key={i} />
+        })}
       </div>
     );
   }
