@@ -3,11 +3,9 @@
 # dependencies
 node_modules
 
-# testing
-coverage
-
 # production
-build
+public/bundle.js
+public/bundle.js.map
 
 # misc
 .DS_Store
