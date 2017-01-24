@@ -9,7 +9,7 @@ export default {
   fontFamily: 'Roboto, sans-serif',
   palette: {
     primary1Color: red500,
-    primary2Color: yellow500,
+    primary2Color: indigo500,
     primary3Color: grey400,
     accent1Color: red500,
     accent2Color: grey100,
@@ -18,7 +18,7 @@ export default {
     alternateTextColor: white,
     canvasColor: white,
     borderColor: grey300,
-    pickerHeaderColor: yellow500,
+    pickerHeaderColor: indigo500,
     shadowColor: fullBlack,
   },
 };
