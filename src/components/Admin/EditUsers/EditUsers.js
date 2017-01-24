@@ -21,8 +21,7 @@ class editUsers extends Component {
   }
 
   getUsersData() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/users';
+    const url = '/api/users';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -75,7 +74,7 @@ class editUsers extends Component {
           onChange={this.manageUsers}
           value={this.state.slideIndex} >
           <Tab style={tabStyles} label="Add Users" value={0}>
-            <AddUser addUserToState={this.addUserToState} api={this.props.route.api} />
+            <AddUser addUserToState={this.addUserToState} />
           </Tab>
           <Tab style={tabStyles} label="Manage Users" value={1}>
             <div className="center">
@@ -84,7 +83,6 @@ class editUsers extends Component {
                   key={i} 
                   user={user} 
                   removeUserFromState={this.removeUserFromState} 
-                  api={this.props.route.api} 
                 />
               )}
             </div>
@@ -93,7 +91,6 @@ class editUsers extends Component {
             <div className="center">
               {this.state.pending.map((user, i) =>
                 <PendingUser 
-                  api={this.props.route.api}
                   user={user} 
                   key={i} 
                   addUserToState={this.addUserToState} 

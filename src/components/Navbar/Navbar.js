@@ -19,8 +19,7 @@ class Navbar extends Component {
   }
 
   isLoggedIn() {
-    const apiRoute = this.props.api;
-    const url = apiRoute + '/api/privelage';
+    const url = '/api/privelage';
     if (localStorage.getItem('RR') !== null) {
       fetch(url, {
         method: 'GET',

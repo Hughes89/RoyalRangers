@@ -24,8 +24,7 @@ class Events extends Component {
   }
 
   getEventsData() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/events';
+    const url = '/api/events';
     fetch(url, {
       method: 'GET',
       headers: {

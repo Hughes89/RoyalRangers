@@ -8,8 +8,7 @@ class PendingUser extends React.Component {
   addPendingUser = () => {
     const accept = confirm('Are you sure you add this user?');
     if (accept) {
-      const apiRoute = this.props.api;
-      let url = apiRoute + '/api/activate/user';
+      const url = '/api/activate/user';
       fetch(url, {
         method: 'PUT',
         headers: {
@@ -30,8 +29,7 @@ class PendingUser extends React.Component {
   removeUser = () => {
     const accept = confirm('Are you sure you want to delete this user?');
     if (accept) {
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/remove/user';
+      const url = '/api/remove/user';
       fetch(url, {
         method: 'DELETE',
         headers: {

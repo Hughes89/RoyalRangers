@@ -23,8 +23,7 @@ class EditAlbumDialog extends Component {
         code: this.state.code,
         id: this.props.album._id
       };
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/pictures';
+      const url = '/api/pictures';
       fetch(url, {
         method: 'PUT',
         headers: {

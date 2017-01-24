@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField } from 'material-ui';
+import { RaisedButton, TextField } from 'material-ui';
 import { browserHistory } from 'react-router';
 
 import './UpPassword.css';
@@ -16,7 +16,6 @@ class UpPassword extends Component {
   }
 
   changePass(e) {
-    const apiRoute = this.props.route.api;
     e.preventDefault();
     if (this.state.password.length < 1) {
       this.setState({
@@ -31,7 +30,7 @@ class UpPassword extends Component {
       });
       return;
     }
-    let url = apiRoute + '/api/password';
+    let url = '/api/password';
     fetch(url, {
       method: 'PUT',
       headers: {
@@ -45,7 +44,6 @@ class UpPassword extends Component {
       })
     })
       .then(res => {
-        console.log(res)
         if (res.status === 401) {
           this.setState({
             passwordError: 'Incorrect password.',
@@ -86,7 +84,7 @@ class UpPassword extends Component {
             errorText={this.state.newPasswordError}
             value={this.state.newPassword}
             onChange={(e) => this.handleInput(e, 'newPassword')} /><br /><br />
-          <FlatButton type="submit" label="Change Password" onClick={(e) => this.changePass(e)} />
+          <RaisedButton type="submit" primary={true} label="Change Password" onClick={(e) => this.changePass(e)} />
         </form>
       </div>
     );

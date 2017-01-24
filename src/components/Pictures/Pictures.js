@@ -16,8 +16,7 @@ class Pictures extends Component {
   }
 
   getAlbums() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/pictures';
+    const url = '/api/pictures';
     fetch(url, {
       method: 'GET',
       headers: {

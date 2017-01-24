@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, DatePicker, TimePicker, Snackbar } from 'material-ui';
+import { RaisedButton, TextField, DatePicker, TimePicker, Snackbar } from 'material-ui';
 
 import './AddEvent.css';
 
@@ -78,8 +78,7 @@ class AddEvent extends Component {
         start: `${this.state.startDateCut} ${this.state.startTimeCut}`,
         end: `${this.state.endDateCut} ${this.state.endTimeCut}`
       };
-      const apiRoute = this.props.api;
-      let url = apiRoute + '/api/add/event';
+      const url = '/api/add/event';
       fetch(url, {
         method: 'POST',
         headers: {
@@ -89,8 +88,9 @@ class AddEvent extends Component {
         },
         body: JSON.stringify(eventFormData)
       })
-        .then(res => res)
+        .then(res => res.json())
         .then(data => {
+          eventFormData._id = data.id;
           this.props.addEventToState(eventFormData);
           this.resetStateWithSnackbar();
         });
@@ -227,8 +227,8 @@ class AddEvent extends Component {
             style={{display: 'inline-block'}}
             onChange={this.handleEndTime} 
           />
-          <br />
-          <FlatButton type="submit" label="Create Event" onClick={this.addEvent} />
+          <br /><br />
+          <RaisedButton type="submit" label="Create Event" primary={true} onClick={this.addEvent} />
           </div>
         </form>
         <Snackbar

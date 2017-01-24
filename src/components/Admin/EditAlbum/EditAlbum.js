@@ -16,8 +16,7 @@ class EditAlbum extends React.Component {
     const accept = confirm('Are you sure you want to delete this event?');
     if (accept) {
       const id = this.props.album._id;
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/pictures';
+      const url = '/api/pictures';
       fetch(url, {
         method: 'DELETE',
         headers: {

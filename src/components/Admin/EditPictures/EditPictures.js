@@ -19,8 +19,7 @@ class EditPictures extends Component {
   }
 
   getAlbums() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/pictures';
+    const url = '/api/pictures';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -82,7 +81,7 @@ class EditPictures extends Component {
         <Tabs onChange={this.managePictures} value={this.state.slideIndex}>
           <Tab style={tabStyles} label="Add Album" value={0}>
             <div className="Edit-Album-Add">
-              <AddAlbum api={this.props.route.api} addAlbumToState={this.addAlbumToState} />
+              <AddAlbum addAlbumToState={this.addAlbumToState} />
             </div>
           </Tab>
           <Tab style={tabStyles} label="Manage Albums" value={1}>
@@ -91,7 +90,6 @@ class EditPictures extends Component {
                   <EditAlbum 
                     album={album}
                     key={i}
-                    api={this.props.route.api} 
                     updateAlbumState={this.updateAlbumState} 
                     removeAlbumFromState={this.removeAlbumFromState}
                   /> 

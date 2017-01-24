@@ -16,8 +16,7 @@ class Home extends Component {
   }
 
   getHomeData() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/home';
+    const url = '/api/home';
     fetch(url, {method: 'GET'})
       .then(res => res.json())
       .then(data => {

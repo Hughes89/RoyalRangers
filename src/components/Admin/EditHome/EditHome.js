@@ -18,8 +18,7 @@ class EditHome extends Component {
   }
 
   getHomeData() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/home';
+    const url = '/api/home';
     fetch(url, {method: 'GET'})
       .then(res => res.json())
       .then(data => {
@@ -31,8 +30,7 @@ class EditHome extends Component {
   }
 
   editHomeData = () => {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/home';
+    const url = '/api/home';
     fetch(url, {
       method: 'PUT',
       headers: {

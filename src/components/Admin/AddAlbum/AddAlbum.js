@@ -23,8 +23,7 @@ class AddAlbum extends Component {
         title: this.state.title,
         code: this.state.code
       }
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/pictures';
+      const url = '/api/pictures';
       fetch(url, {
         method: 'POST',
         headers: {
@@ -34,9 +33,9 @@ class AddAlbum extends Component {
         },
         body: JSON.stringify(albumFormData)
       })
-        .then(res => res)
+        .then(res => res.json())
         .then(data => {
-          this.props.addAlbumToState(albumFormData);
+          this.props.addAlbumToState(data);
           this.resetStateWithSnackbar();
         });
     }

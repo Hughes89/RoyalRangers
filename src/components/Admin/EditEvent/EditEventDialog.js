@@ -33,8 +33,7 @@ class EditEventDialog extends Component {
         description: this.state.description,
         location: this.state.location
       };
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/update/event';
+      const url = '/api/update/event';
       fetch(url, {
         method: 'PUT',
         headers: {

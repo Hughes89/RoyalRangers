@@ -9,8 +9,7 @@ class EditUser extends React.Component {
     const accept = confirm('Are you sure you want to delete this user?');
     if (accept) {
       const id = this.props.user._id;
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/remove/user';
+      const url = '/api/remove/user';
       fetch(url, {
         method: 'DELETE',
         headers: {

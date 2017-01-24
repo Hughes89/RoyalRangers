@@ -21,8 +21,7 @@ class Login extends Component {
       this.setState({emailError: 'Please enter an e-mail address.'});
       return;
     }
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/signin';
+    const url = '/api/signin';
     fetch(url, {
       method: 'POST',
       headers: {

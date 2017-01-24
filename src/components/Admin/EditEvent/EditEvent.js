@@ -16,8 +16,7 @@ class EditEvent extends React.Component {
     const accept = confirm('Are you sure you want to delete this event?');
     if (accept) {
       const id = this.props.event._id;
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/remove/event';
+      const url = '/api/remove/event';
       fetch(url, {
         method: 'DELETE',
         headers: {

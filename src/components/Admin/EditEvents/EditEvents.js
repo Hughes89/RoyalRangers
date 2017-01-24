@@ -19,8 +19,7 @@ class EditEvents extends Component {
   }
 
   getEventsData() {
-    const apiRoute = this.props.route.api;
-    const url = apiRoute + '/api/events';
+    const url = '/api/events';
     fetch(url, {
       method: 'GET',
       headers: {
@@ -75,11 +74,11 @@ class EditEvents extends Component {
           onChange={this.manageEvents}
           value={this.state.slideIndex} >
           <Tab style={tabStyles} label="Add Event" value={0}>
-            <AddEvent api={this.props.route.api} addEventToState={this.addEventToState} />
+            <AddEvent addEventToState={this.addEventToState} />
           </Tab>
           <Tab style={tabStyles} label="Manage Events" value={1}>
             {this.state.body.map((event, i) => 
-              <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} api={this.props.route.api} />
+              <EditEvent key={i} event={event} removeEventFromState={this.removeEventFromState} updateEventState={this.updateEventState} />
             )}
           </Tab>
         </Tabs>

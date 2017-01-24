@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField, SelectField, MenuItem, Snackbar } from 'material-ui';
+import { RaisedButton, TextField, SelectField, MenuItem, Snackbar } from 'material-ui';
 
 import './AddUser.css';
 
@@ -32,8 +32,7 @@ class AddUser extends Component {
         privelage: this.state.privelage,
         pending: false 
       }
-      const apiRoute = this.props.api;
-      const url = apiRoute + '/api/signup';
+      const url = '/api/signup';
       fetch(url, {
         method: 'POST',
         headers: {
@@ -43,8 +42,9 @@ class AddUser extends Component {
         },
         body: JSON.stringify(userFormData)
       })
-        .then(res => res)
+        .then(res => res.json())
         .then(data => {
+          userFormData._id = data.id;
           this.props.addUserToState(userFormData);
           this.resetStateWithSnackbar();
         });
@@ -167,8 +167,8 @@ class AddUser extends Component {
             <MenuItem key={1} value="user" primaryText="User" />
             <MenuItem key={2} value="admin" primaryText="Admin" />
           </SelectField>
-          <br />
-          <FlatButton type="submit" label="Create User" onClick={this.addUser} />
+          <br /><br />
+          <RaisedButton type="submit" label="Create User" primary={true} onClick={this.addUser} />
         </form>
         <Snackbar
           open={this.state.open}
