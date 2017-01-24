@@ -3,6 +3,9 @@
 # dependencies
 node_modules
 
+#production
+public/bundle.js
+public/bundle.js.map
 
 # misc
 .DS_Store
