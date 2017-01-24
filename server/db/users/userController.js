@@ -103,8 +103,10 @@ module.exports = {
               privelage: req.body.privelage || 'user',
               pending: req.body.pending || false
             })
-              .then((user) => {
-                res.sendStatus(201);
+              .then(user => res.json({id: user._id}))
+              .catch(err => {
+                if (err) console.log(err);
+                res.sendStatus(404);
               });
           });
       });

@@ -8,7 +8,7 @@ module.exports = {
       location: req.body.location,
       start: req.body.start,
       end: req.body.end })
-      .then(event => res.sendStatus(201))
+      .then(event => res.json({id: event.id}))
       .catch(err => {
         console.log(err);
         res.sendStatus(400);

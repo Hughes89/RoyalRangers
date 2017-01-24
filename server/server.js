@@ -2,12 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+
 require('dotenv').config();
 
 const port = process.env.PORT || 1337;
 
-app.use(express.static('./build'));
-app.use('/node_modules', express.static('node_modules'));
+app.use(express.static('./public'));
+//app.use('/node_modules', express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,6 +16,12 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
     next();
 });
+
+if (!process.env.production) {
+  const morgan = require('morgan');
+  app.use(morgan('dev'));
+}
+
 require('./config/routes')(app, express);
 
 mongoose.Promise = global.Promise;

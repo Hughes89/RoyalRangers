@@ -33,5 +33,5 @@ module.exports = (app, express) => {
   app.put('/api/pictures', auth.isAuth, auth.isAdmin, pictures.editAlbum);
 
 
-  app.get('*', (req, res, next) => res.sendFile(path.resolve('build/index.html')));
+  app.get('*', (req, res, next) => res.sendFile(path.resolve('./public/index.html')));
 };

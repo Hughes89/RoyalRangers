@@ -6,7 +6,7 @@ module.exports = {
       title: req.body.title,
       code: req.body.code
     })
-      .then(picture => res.sendStatus(201))
+      .then(picture => res.json(picture))
       .catch(err => {
         if (err) console.log(err);
         res.sendStatus(400);
