@@ -100,8 +100,8 @@ module.exports = {
               firstName: req.body.firstName,
               lastName: req.body.lastName,
               salt: data.salt,
-              privelage: req.body.privelage || 'user',
-              pending: req.body.pending || false
+              privelage: req.body.privelage,
+              pending: req.body.pending
             })
               .then(user => res.json({id: user._id}))
               .catch(err => {
