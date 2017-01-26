@@ -5,6 +5,7 @@ import App from './components/App/App.js';
 import Home from './components/Home/Home';
 import Pictures from './components/Pictures/Pictures';
 import Events from './components/Events/Events';
+import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
 import EditHome from './components/Admin/EditHome/EditHome';
@@ -30,6 +31,7 @@ const router = (
       <Route path="/events" component={Events} onEnter={authenticateUser} />
       <Route path="/login" component={Login} />
       <Route path='/pictures' component={Pictures} onEnter={authenticateUser} />
+      <Route path='/signup' component={Signup} />
       <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} />
       <Route path='/update/pictures' component={EditPictures} onEnter={authenticateAdmin} />
       <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} />
