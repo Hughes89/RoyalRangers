@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatButton, TextField } from 'material-ui';
+import { RaisedButton, TextField } from 'material-ui';
 
 import './Login.css';
 
@@ -109,8 +109,8 @@ class Login extends Component {
               errorStyle={{float: "left"}}
               errorText={this.state.passwordError}
             />
-            <br />
-            <FlatButton type="submit" label="Sign in" onClick={this.signin} />
+            <br /><br />
+            <RaisedButton type="submit" primary={true} label="Sign in" onClick={this.signin} />
             <div style={{color: 'red'}} >{this.state.pendError}</div>
           </form>
         </div>
