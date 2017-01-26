@@ -15,7 +15,7 @@ module.exports = {
       req.user = user;
       next();
     } catch (error) {
-      return sendStatus(401);
+      return res.sendStatus(401);
     }
   },
 

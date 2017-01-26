@@ -12,7 +12,7 @@ module.exports = (app, express) => {
   app.put('/api/home', auth.isAuth, home.editHome);
 
   //User Routes
-  app.post('/api/signup', auth.isAuth, user.signup);
+  app.post('/api/signup', user.signup);
   app.post('/api/signin', user.signin);
   app.put('/api/password', auth.isAuth, user.changePassword);
   app.get('/api/privelage', auth.isAuth, user.privelageCheck);
