@@ -65,7 +65,7 @@ class Navbar extends Component {
       return (
         <div>
           <FlatButton style={{color: 'white'}} label="Sign in to view full site" onClick={this.handleButton.bind(this)} />
-          <FlatButton style={{color: 'white'}} label="Sign Up" />
+          <FlatButton style={{color: 'white'}} label="Sign Up" onClick={() => this.gotoLink('/signup')} />
         </div>
          )
     }
