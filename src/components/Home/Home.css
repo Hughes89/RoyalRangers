@@ -11,12 +11,30 @@
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
 
-.body{
+.body {
   padding: 1em;
+  width: 70%;
+  float: left;
+}
+
+.banner {
+  padding: .5em;
+  text-align: center;
+}
+
+.News-Container {
+    width: 25%;
+    display: inline-block;
+}
+
+.News-Description > p{
+  padding-bottom: 5px;
+  margin: 0;
 }
 
 @media all and (max-width: 640px) {
   .main-image {
     height: 200px;
+    width: 100%;
   }
 }

@@ -1,0 +1,10 @@
+.album {
+  text-align: center;
+  padding: 3px;
+}
+
+.Album-Container {
+  text-align: center;
+  padding: 1em;
+  display: inline-block;
+}

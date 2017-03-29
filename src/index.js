@@ -1,18 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import App from './components/App/App.js';
-import Home from './components/Home/Home';
-import Pictures from './components/Pictures/Pictures';
-import Events from './components/Events/Events';
-import Signup from './components/Signup/Signup';
-import Login from './components/Login/Login';
-import NotFound from './components/NotFound/NotFound';
-import EditHome from './components/Admin/EditHome/EditHome';
-import EditEvents from './components/Admin/EditEvents/EditEvents';
-import EditPictures from './components/Admin/EditPictures/EditPictures';
-import EditUsers from './components/Admin/EditUsers/EditUsers';
-import UpPassword from './components/UpPassword/UpPassword';
+import { componentList } from './components.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import customTheme from './muiTheme';
@@ -26,18 +15,18 @@ const muiTheme = getMuiTheme(customTheme);
 const router = (
   <MuiThemeProvider muiTheme={muiTheme} >
   <Router history={browserHistory}>
-    <Route path="/" component={App} >
-      <IndexRoute component={Home} />
-      <Route path="/events" component={Events} onEnter={authenticateUser} />
-      <Route path="/login" component={Login} />
-      <Route path='/pictures' component={Pictures} onEnter={authenticateUser} />
-      <Route path='/signup' component={Signup} />
-      <Route path='/update/home' component={EditHome} onEnter={authenticateAdmin} />
-      <Route path='/update/pictures' component={EditPictures} onEnter={authenticateAdmin} />
-      <Route path='/update/events' component={EditEvents} onEnter={authenticateAdmin} />
-      <Route path='/update/users' component={EditUsers} onEnter={authenticateAdmin} />
-      <Route path='/update/pass' component={UpPassword} />
-      <Route path='*' component={NotFound} />
+    <Route path="/" component={componentList.App} >
+      <IndexRoute component={componentList.Home} />
+      <Route path="/events" component={componentList.Events} onEnter={authenticateUser} />
+      <Route path="/login" component={componentList.Login} />
+      <Route path='/pictures' component={componentList.Pictures} onEnter={authenticateUser} />
+      <Route path='/signup' component={componentList.Signup} />
+      <Route path='/update/home' component={componentList.EditHome} onEnter={authenticateAdmin} />
+      <Route path='/update/pictures' component={componentList.EditPictures} onEnter={authenticateAdmin} />
+      <Route path='/update/events' component={componentList.EditEvents} onEnter={authenticateAdmin} />
+      <Route path='/update/users' component={componentList.EditUsers} onEnter={authenticateAdmin} />
+      <Route path='/update/pass' component={componentList.UpPassword} />
+      <Route path='*' component={componentList.NotFound} />
     </Route>
   </Router>
   </MuiThemeProvider>

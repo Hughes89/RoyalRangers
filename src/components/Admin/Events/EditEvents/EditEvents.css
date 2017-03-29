@@ -1,0 +1,12 @@
+.event-manage {
+  text-align: center;
+  font-size: 25px;
+}
+
+.event-link:hover {
+  cursor: pointer;
+}
+
+.Edit-Events {
+  text-align: center;
+}
