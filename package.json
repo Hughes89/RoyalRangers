@@ -28,7 +28,7 @@
     "dev-web": "webpack-dev-server --config webpack.dev.config.js --progress --colors",
     "dev-server": "nodemon server/server.js",
     "test": "react-scripts test --env=jsdom",
-    "postinstall": "npm build"
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
