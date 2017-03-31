@@ -7,8 +7,7 @@ class Home extends Component {
     super(props);
     this.state = {
       banner: '',
-      body: '',
-      news: []
+      body: ''
     };
   }
 
@@ -31,8 +30,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <div className="banner" style={{backgroundImage: `url(${this.state.banner})`}}>
-        </div>
+        <div className="banner" style={{backgroundImage: `url(${this.state.banner})`}} />
         <div className="body" dangerouslySetInnerHTML={{__html: this.state.body}} />
       </div>
     );
