@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dialog, FlatButton } from 'material-ui';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
-import Event from '../Event/Event';
+import Event from './Event/Event';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Events.css';
