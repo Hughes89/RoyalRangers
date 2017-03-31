@@ -22,13 +22,11 @@
     "node": "6.6.0"
   },
   "scripts": {
-    "dev": "react-scripts start",
     "start": "node server/server.js",
     "build": "webpack -p --config webpack.production.config.js --progress --colors",
     "dev-web": "webpack-dev-server --config webpack.dev.config.js --progress --colors",
     "dev-server": "nodemon server/server.js",
-    "test": "react-scripts test --env=jsdom",
-    "postinstall": "npm run build"
+    "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
