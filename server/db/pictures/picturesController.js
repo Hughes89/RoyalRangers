@@ -1,5 +1,5 @@
 const Pictures = require('./picturesModel');
-const helpers = require('../helpers.js');
+const helpers = require('./helpers.js');
 
 module.exports = {
   addAlbum: (req, res, next) => {
