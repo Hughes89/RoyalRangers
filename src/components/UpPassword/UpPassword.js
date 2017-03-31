@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RaisedButton, TextField } from 'material-ui';
+import { RaisedButton, TextField, Snackbar } from 'material-ui';
 import { browserHistory } from 'react-router';
 
 import './UpPassword.css';
@@ -11,7 +11,8 @@ class UpPassword extends Component {
       password: '',
       newPassword: '',
       passwordError: '',
-      newPasswordError: ''
+      newPasswordError: '',
+      open: false
     };
   }
 
@@ -51,7 +52,8 @@ class UpPassword extends Component {
           })
         }
         if (res.status === 200) {
-          browserHistory.push('/');
+          this.setState({ open: true })
+          setTimeout(() => browserHistory.push('/'), 1000);
         }
       });
   }
@@ -62,6 +64,12 @@ class UpPassword extends Component {
       [state]: value
     });
   }
+
+  handleSnackbarClose = () => {
+    this.setState({
+      open: false
+    });
+  };
 
 
   render() {
@@ -86,6 +94,12 @@ class UpPassword extends Component {
             onChange={(e) => this.handleInput(e, 'newPassword')} /><br /><br />
           <RaisedButton type="submit" primary={true} label="Change Password" onClick={(e) => this.changePass(e)} />
         </form>
+        <Snackbar
+          open={this.state.open}
+          message="Password Changed!"
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </div>
     );
   }
