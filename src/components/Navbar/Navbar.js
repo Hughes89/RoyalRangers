@@ -130,7 +130,7 @@ class Navbar extends Component {
           <MenuItem onTouchTap={() => this.gotoLink('/update/pass')}>Update Password</MenuItem>
         </Drawer>
         <AppBar
-          title={<span className="title">Royal Rangers</span>}
+          title={<span className="title">Royal Rangers Outpost 5</span>}
           onTitleTouchTap={() => this.gotoLink('/')}
           style={{background: 'linear-gradient(135deg, rgba(199,34,0,1) 0%,rgba(232,108,87,1) 50%,rgba(234,40,3,1) 51%,rgba(255,102,0,1) 75%,rgba(199,34,0,1) 100%)'}}
           iconElementRight={this.isAdmin()}

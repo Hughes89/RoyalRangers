@@ -85,7 +85,7 @@ class EditPictures extends Component {
             </div>
           </Tab>
           <Tab style={tabStyles} label="Manage Albums" value={1}>
-            <div>
+            <div className="Edit-Picture-Container">
               {this.state.body.map((album, i) => (
                   <EditAlbum 
                     album={album}
