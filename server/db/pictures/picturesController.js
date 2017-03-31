@@ -1,10 +1,12 @@
 const Pictures = require('./picturesModel');
+const helpers = require('../helpers.js');
 
 module.exports = {
   addAlbum: (req, res, next) => {
+    const code = helpers.addTargetBlank(req.body.code);
     Pictures.create({
       title: req.body.title,
-      code: req.body.code
+      code: code
     })
       .then(picture => res.json(picture))
       .catch(err => {
