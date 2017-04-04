@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Commander from './Commander/Commander.js';
 
 import './Home.css';
 
@@ -7,7 +8,8 @@ class Home extends Component {
     super(props);
     this.state = {
       banner: '',
-      body: ''
+      body: '',
+      commanders: [{ name: 'Mike Hughes', title: 'Lead', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}]
     };
   }
 
@@ -29,9 +31,20 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="Home">
+      <div className="home">
         <div className="banner" style={{backgroundImage: `url(${this.state.banner})`}} />
-        <div className="body" dangerouslySetInnerHTML={{__html: this.state.body}} />
+        <div className="home-content">
+          <div className="about-content">
+            <h2>About Us</h2>
+            <div className="about" dangerouslySetInnerHTML={{__html: this.state.body}} />
+          </div>
+          <div className="commanders">
+          <h2>Meet the Commanders</h2>
+            {this.state.commanders.map((commander, i) => 
+              <Commander key={i} {...commander} />
+            )}
+          </div>
+        </div>
       </div>
     );
   }
