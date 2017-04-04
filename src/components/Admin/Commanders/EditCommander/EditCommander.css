@@ -1,0 +1,16 @@
+.Edit-Commander{
+  display: inline-block;
+}
+
+.Commander-Container {
+  padding: 10px;
+  text-align: left;
+}
+
+.center-button {
+  text-align: center;
+}
+
+.user{
+  letter-spacing: 1px;
+}

@@ -25,6 +25,7 @@ const router = (
       <Route path='/update/pictures' component={componentList.EditPictures} onEnter={authenticateAdmin} />
       <Route path='/update/events' component={componentList.EditEvents} onEnter={authenticateAdmin} />
       <Route path='/update/users' component={componentList.EditUsers} onEnter={authenticateAdmin} />
+      <Route path='/update/commanders' component={componentList.EditCommanders} onEnter={authenticateAdmin} />
       <Route path='/update/pass' component={componentList.UpPassword} />
       <Route path='*' component={componentList.NotFound} />
     </Route>

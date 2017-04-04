@@ -54,6 +54,7 @@
   padding-top: 10px;
   background-color: #E8E8E8;
   width: 50%;
+  margin-bottom: 10px;
 }
 
 @media all and (max-width: 670px) {

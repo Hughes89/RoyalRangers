@@ -10,6 +10,7 @@ import EditEvents from './components/Admin/Events/EditEvents/EditEvents';
 import EditPictures from './components/Admin/Albums/EditPictures/EditPictures';
 import EditUsers from './components/Admin/Users/EditUsers/EditUsers';
 import UpPassword from './components/UpPassword/UpPassword';
+import EditCommanders from './components/Admin/Commanders/EditCommanders/EditCommanders';
 
 export const componentList = {
   App,
@@ -23,5 +24,6 @@ export const componentList = {
   EditEvents,
   EditPictures,
   EditUsers,
-  UpPassword
+  UpPassword,
+  EditCommanders
 };

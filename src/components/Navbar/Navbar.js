@@ -128,6 +128,7 @@ class Navbar extends Component {
           onRequestChange={this.handleButton}
           >
           <MenuItem onTouchTap={() => this.gotoLink('/update/home')}>Update Home Page</MenuItem>
+          <MenuItem onTouchTap={() => this.gotoLink('/update/commanders')}>Manage Commanders</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/events')}>Manage Events</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/users')}>Manage Users</MenuItem>
           <MenuItem onTouchTap={() => this.gotoLink('/update/pictures')}>Manage Pictures</MenuItem>
