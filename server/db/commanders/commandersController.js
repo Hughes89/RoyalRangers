@@ -11,10 +11,7 @@ module.exports = {
       about: about,
       picture: picture })
         .then(commander => res.json({id: commander.id}))
-        .catch(err => {
-          console.log(err);
-          res.sendStatus(400);
-        });
+        .catch(err => res.sendStatus(400));
   },
 
   deleteCommander: (req, res, next) => {
@@ -47,10 +44,7 @@ module.exports = {
   getCommanders: (req, res, next) => {
     Commanders.find({})
       .then(command => res.json(command))
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(404);
-      });
+      .catch(err => res.sendStatus(404));
   }
   
 };
