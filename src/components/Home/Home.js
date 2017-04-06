@@ -9,12 +9,13 @@ class Home extends Component {
     this.state = {
       banner: '',
       body: '',
-      commanders: [{ name: 'Mike Hughes', title: 'Lead', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}]
+      commanders: []
     };
   }
 
   componentWillMount() {
     this.getHomeData();
+    this.getCommanders();
   }
 
   getHomeData() {
@@ -29,6 +30,17 @@ class Home extends Component {
       });
   }
 
+  getCommanders() {
+    const url = '/api/commanders';
+    fetch(url, { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          commanders: data
+        });
+      });
+  }
+
   render() {
     return (
       <div className="home">
@@ -36,10 +48,12 @@ class Home extends Component {
         <div className="home-content">
           <div className="about-content">
             <h2>About Us</h2>
+            <span className="title-fade-line" />
             <div className="about" dangerouslySetInnerHTML={{__html: this.state.body}} />
           </div>
           <div className="commanders">
           <h2>Meet the Commanders</h2>
+          <span className="title-fade-line" />
             {this.state.commanders.map((commander, i) => 
               <Commander key={i} {...commander} />
             )}
