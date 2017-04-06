@@ -4,12 +4,7 @@ module.exports = {
 
   addCommander: (req, res, next) => {
     const { name, title, email, about, picture } = req.body;
-    Commanders.create({
-      name: name,
-      title: title,
-      email: email,
-      about: about,
-      picture: picture })
+    Commanders.create({ name, title, email, about, picture })
         .then(commander => res.json({id: commander.id}))
         .catch(err => res.sendStatus(400));
   },
@@ -29,14 +24,8 @@ module.exports = {
   },
 
   editCommander: (req, res, next) => {
-    const id = req.body.id;
-    Commanders.update({ _id: id}, 
-      {name: req.body.name,
-      title: req.body.title,
-      about: req.body.about,
-      picture: req.body.picture,
-      email: req.body.email},
-      {new: true})
+    const { _id, name, title, email , picture, about } = req.body;
+    Commanders.update({ _id: _id}, { name, title, about, picture, email }, {new: true})
       .then(commander => res.sendStatus(200))
       .catch(err => res.sendStatus(404));
   },
