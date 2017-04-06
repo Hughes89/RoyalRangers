@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardText, RaisedButton } from 'material-ui';
 
-const ViewCommander = ({name, title, email, picture, about, removeUser, editBody}) => (
+const ViewCommander = ({name, title, email, picture, about, removeUser, handleDialog}) => (
       <Card>
         <CardText style={{padding: '20px'}} >
           <p className="commander-card">
@@ -16,7 +16,7 @@ const ViewCommander = ({name, title, email, picture, about, removeUser, editBody
             <strong className="user">About:</strong> {about}
           </p>
           <div className="center-button">
-            <RaisedButton label="Edit Commander" onClick={editBody} primary={true} style={{paddingRight: '5px'}}/>
+            <RaisedButton label="Edit Commander" onClick={handleDialog} primary={true} style={{paddingRight: '5px'}}/>
             <RaisedButton label="Remove Commander" onClick={removeUser} primary={true} />
           </div>
         </CardText>

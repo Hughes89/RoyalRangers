@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Tab, Tabs } from 'material-ui';
+import { Tab, Tabs, RaisedButton, Dialog } from 'material-ui';
 import EditCommander from '../EditCommander/EditCommander.js';
+import UpdateCommander from '../EditCommander/UpdateCommander/UpdateCommander.js';
 
 import './EditCommanders.css';
 
@@ -10,54 +11,42 @@ class EditCommanders extends Component {
     this.state = {
       body: [],
       slideIndex: 1,
+      open: false
     };
   }
 
   componentWillMount() {
-    this.getUsersData();
+    this.getCommanderData();
   }
 
-  getUsersData() {
-    // const url = '/api/user';
-    // fetch(url, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Authorization': 'Bearer ' + localStorage.getItem('RR')
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     data.forEach(user => {
-    //       user.pending ? this.setState({ pending: this.state.pending.concat(user) }) : this.setState({ body: this.state.body.concat(user) });
-    //     });
-    //   });
-    this.setState({
-      body: [{ id: 1, name: 'Mike Hughes', title: 'Lead', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { id: 2, name: 'Mike Hughes', title: 'Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { id: 3, name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}, { id: 4, name: 'Mike Hughes', title: 'Next Next', email: 'email.com', picture: 'https://avatars3.githubusercontent.com/u/17888273?v=3&s=460', about: 'small content'}]
-    });
+  getCommanderData() {
+    const url = '/api/commanders';
+    fetch(url, { method: 'GET' })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          body: data
+        })
+      });
   }
 
+  /* State Manipulations */
   addUserToState = (user) => {
     this.setState({
-      body: this.state.body.concat(user),
+      body: [...this.state.body, user],
     });
   }
 
-  removeUserFromState = (id) => {
+  removeCommanderFromState = (id) => {
     this.setState({
       body: this.state.body.filter(ele => ele._id !== id)
     });
   };
 
-  manageUsers = (value) => {
-    this.setState({
-      slideIndex: value
-    });
-  };
-
-  updateCommanderState = (id, update) => {
+  updateCommanderState = (update) => {
     this.setState({
       body: this.state.body.map(commander => {
-        if (commander.id === id) {
+        if (commander._id === update._id) {
           commander = update;
         }
         return commander;
@@ -65,15 +54,35 @@ class EditCommanders extends Component {
     });
   };
 
+  /* Tabs/Dialog Functionality */
+  handleDialog = () => {
+    this.setState({
+      open: !this.state.open
+    });
+  };
+
+  manageTabs = (value) => {
+    if (value === 0) {
+      this.handleDialog();
+    }
+  };
+
   render() {
     const tabStyles = {
       backgroundColor: '#FFEB3B',
       color: '#616161'
     };
+    const action = [
+      <RaisedButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleDialog} 
+      />
+    ];
     return (
       <div className="Edit-Commanders">
         <Tabs 
-          onChange={this.manageUsers}
+          onChange={this.manageTabs}
           value={this.state.slideIndex} >
           <Tab style={tabStyles} label="Add Commander" value={0}>
             <div></div>
@@ -81,11 +90,30 @@ class EditCommanders extends Component {
           <Tab style={tabStyles} label="Manage Commanders" value={1}>
             <div className="manage-commanders">
               {this.state.body.map((commander, i) => 
-                <EditCommander commander={commander} key={i} updateCommanderState={this.updateCommanderState} />
+                <EditCommander 
+                  key={i}
+                  commander={commander}
+                  updateCommanderState={this.updateCommanderState}
+                  removeCommanderFromState={this.removeCommanderFromState}
+                  />
               )}
             </div>
           </Tab>
         </Tabs>
+        <Dialog
+          title='Edit Commander'
+          actions={action}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleDialog}
+          autoScrollBodyContent={true}
+          >
+          <UpdateCommander
+            add={true}
+            addUserToState={this.addUserToState}
+            closeDialog={this.handleDialog}
+            />
+        </Dialog>
       </div>
     );
   }
