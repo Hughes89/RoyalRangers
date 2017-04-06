@@ -2,6 +2,7 @@ const home = require('../db/home/homeController');
 const user = require('../db/users/userController');
 const events = require('../db/events/eventsController');
 const pictures = require('../db/pictures/picturesController');
+const commanders = require('../db/commanders/commandersController');
 const auth = require('./auth');
 const path = require('path');
 
@@ -32,6 +33,11 @@ module.exports = (app, express) => {
   app.post('/api/pictures', auth.isAuth, auth.isAdmin, pictures.addAlbum);
   app.put('/api/pictures', auth.isAuth, auth.isAdmin, pictures.editAlbum);
 
+  //Commander Routes
+  app.get('/api/commanders', commanders.getCommanders);
+  app.delete('/api/remove/commander', auth.isAuth, auth.isAdmin, commanders.deleteCommander);
+  app.post('/api/add/commander', auth.isAuth, auth.isAdmin, commanders.addCommander);
+  app.put('/api/update/commander', auth.isAuth, auth.isAdmin, commanders.editCommander);
 
   app.get('*', (req, res, next) => res.sendFile(path.resolve('./public/index.html')));
 };
